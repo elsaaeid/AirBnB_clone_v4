@@ -9,7 +9,7 @@ Amenity = Amenity
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 
 
-class TestAmenityDocs(unittest.TestCase):
+class TestAmenity(unittest.TestCase):
     """Class for testing Amenity documentation"""
 
     @classmethod
