@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import unittest
 from models.amenity import Amenity
 from models.engine.file_storage import FileStorage
