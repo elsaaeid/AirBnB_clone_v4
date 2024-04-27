@@ -4,20 +4,21 @@ import os
 from models.user import User
 
 
-def setUpModule():
-    """ Funtion to set up a Module """
-    pass
+class TestUser(unittest.TestCase):
+    """Unit tests for the User class"""
 
+    @classmethod
+    def setUpClass(cls):
+        """Set up the class"""
+        print("setUpClass")
 
-def tearDownModule():
-    """ Function to clean up a Module """
-    pass
+    @classmethod
+    def tearDownClass(cls):
+        """Clean up the class"""
+        print("tearDownClass")
 
-
-class TestModels(unittest.TestCase):
-    """ Funtion to test the BaseModel """
     def setUp(self):
-        """ Set up a variable """
+        """Set up the test"""
         self.user_test = User()
         self.user_test.first_name = 'Said'
         self.user_test.last_name = "Ellithy"
@@ -26,26 +27,16 @@ class TestModels(unittest.TestCase):
         print("setUp")
 
     def tearDown(self):
-        """ Clean up variable """
+        """Clean up the test"""
         print("tearDown")
 
-    @classmethod
-    def setUpClass(cls):
-        """ Set up class """
-        print("setUpClass")
-
-    @classmethod
-    def tearDownClass(cls):
-        """ Clean up the class """
-        print("tearDownClass")
-
-    def userTest(self):
-        """ Check if user exists """
+    def test_user_documentation(self):
+        """Check the documentation"""
         self.assertIsNotNone(User.__doc__)
         self.assertIsNotNone(User.__init__.__doc__)
 
-    def userPropertiesTest(self):
-        """ Check if the user properties are created """
+    def test_user_properties(self):
+        """Check if the user properties are created"""
         self.user_test.save()
         self.assertTrue(os.path.isfile('file.json'))
         self.assertTrue(hasattr(self.user_test, "__init__"))
@@ -54,32 +45,32 @@ class TestModels(unittest.TestCase):
         self.assertTrue(hasattr(self.user_test, "email"))
         self.assertTrue(hasattr(self.user_test, "password"))
 
-    def userFirstNameTest(self):
-        """ Check if the first name is created """
+    def test_user_first_name(self):
+        """Check if the first name is created"""
         self.assertEqual(self.user_test.first_name, 'Said')
 
-    def userLastNameTest(self):
-        """ Chaeck if the last name is created """
+    def test_user_last_name(self):
+        """Check if the last name is created"""
         self.assertEqual(self.user_test.last_name, "Ellithy")
 
-    def userEmailTest(self):
-        """ Chaeck if the email is created """
+    def test_user_email(self):
+        """Check if the email is created"""
         self.assertEqual(self.user_test.email, 'saidsadaoy@gmail.com')
 
-    def userPasswordTest(self):
-        """ Chaeck if the password is created """
+    def test_user_password(self):
+        """Check if the password is created"""
         self.assertEqual(self.user_test.password, "root")
 
-    def modelsToDictTest(self):
-        """ Check the converting to dict """
+    def test_model_to_dict(self):
+        """Check converting to dict"""
         my_dict = self.user_test.to_dict()
         self.assertIsInstance(my_dict["id"], str)
         self.assertIsInstance(my_dict["email"], str)
         self.assertIsInstance(my_dict["created_at"], str)
         self.assertIsInstance(my_dict["updated_at"], str)
 
-    def userInstanceTest(self):
-        """ Check if user_test is instance of User """
+    def test_user_instance(self):
+        """Check if user_test is an instance of User"""
         self.assertIsInstance(self.user_test, User)
 
 
