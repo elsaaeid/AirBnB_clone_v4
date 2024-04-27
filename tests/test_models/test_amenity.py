@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import unittest
 import os
-from models import Amenity
+from models.amenity import Amenity
 
 
 class TestAmenity(unittest.TestCase):
