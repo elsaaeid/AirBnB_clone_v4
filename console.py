@@ -15,16 +15,19 @@ from models.amenity import Amenity
 from models.review import Review
 import json
 
+classes = {
+    "Amenity": Amenity,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "User": User
+}
 
 class HBNBCommand(cmd.Cmd):
     """this class for the command interpreter"""
     prompt = '(hbnb)'
     file = None
-
-    classes = {"BaseModel": BaseModel, "User": User,
-               "State": State, "City": City,
-               "Place": Place, "Amenity": Amenity,
-               "Review":  Review}
 
     def do_EOF(self, arg):
         """EOF is command used to exit the program"""
@@ -77,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
         my_arg = arg.split(" ")
         if not arg:
             print("** class name missing **")
-        elif my_arg[0] not in clasess:
+        elif my_arg[0] not in classes:
             print("** class doesn't exist **")
         elif len(my_arg) >= 1:
             try:
