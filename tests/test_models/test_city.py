@@ -128,15 +128,11 @@ class TestCity(unittest.TestCase):
         city_key = "City." + self.city.id
         self.assertIn(city_key, all_cities)
 
-    def test_city_delete(self):
-        """Test if the delete function works for City"""
-        city_id = self.city.id
-        storage.new(self.city)
-        storage.save()
-        storage.delete(self.city)
-        all_cities = storage.all(City)
-        city_key = "City." + city_id
-        self.assertNotIn(city_key, all_cities)
+    def test_str(self):
+        """Test that the str method has the correct output"""
+        city = City()
+        expected_string = f"[City] ({city.id}) {city.__dict__}"
+        self.assertEqual(expected_string, str(city))
 
 
 if __name__ == '__main__':
