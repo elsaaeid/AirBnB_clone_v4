@@ -67,3 +67,7 @@ class BaseModel(Base):
     def delete(self):
         """Delete the current instance from the storage"""
         models.storage.delete(self)
+
+    def reload(self):
+        """Reloads the model instance"""
+        models.storage.reload(self)
