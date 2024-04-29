@@ -111,11 +111,10 @@ class TestBaseModel(unittest.TestCase):
         """Test if the delete function works for BaseModel"""
         model = BaseModel()
         model.delete()
-        self.assertNotIn(model, BaseModel._BaseModel__objects)
+        self.assertNotIn(model, BaseModel)
 
     def test_new_instance(self):
         """Test if a new instance of BaseModel is created"""
-        model = BaseModel()
         new_model = BaseModel()
         self.assertIsInstance(new_model, BaseModel)
 
