@@ -103,7 +103,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(string_representation,
                          f"[BaseModel] ({model.id}) {model.__dict__}")
 
-    @mock.patch('models.storage_type')
+    @mock.patch('models.storage')
     def test_save(self, mock_storage):
         """Test that save method updates `updated_at` and calls
         `storage.save`"""
