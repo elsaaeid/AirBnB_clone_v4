@@ -46,16 +46,18 @@ class BaseModel(Base):
 
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
-        excluded_keys = ["_sa_instance_state"]
+        new_dict = self.__dict__.copy()
+        format = "%Y-%m-%dT%H:%M:%S.%f"
+        if "created_at" in new_dict:
+            new_dict["created_at"] = self.created_at.strftime(format)
+        if "updated_at" in new_dict:
+            new_dict["updated_at"] = self.updated_at.strftime(format)
+        new_dict["__class__"] = type(self).__name__
+        if "_sa_instance_state" in new_dict:
+            del new_dict["_sa_instance_state"]
         if secure_pwd and models.storage_type == "db":
-            excluded_keys.append("password")
-        return {
-            key: value.strftime("%Y-%m-%dT%H:%M:%S.%f")
-            if isinstance(value, datetime.datetime) and key in ["created_at", "updated_at"]
-            else value
-            for key, value in self.__dict__.items()
-            if key not in excluded_keys
-        }
+            del new_dict['password']
+        return new_dict
 
     def delete(self):
         """Delete the current instance from the storage"""
