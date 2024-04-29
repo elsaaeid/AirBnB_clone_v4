@@ -93,6 +93,7 @@ class TestPlace(unittest.TestCase):
 
     def test_place_attributes(self):
         """Test Place attributes"""
+        place = Place()
         attributes = {
             "city_id": (str, ""),
             "user_id": (str, ""),
@@ -108,16 +109,13 @@ class TestPlace(unittest.TestCase):
         }
 
         for attr, (attr_type, default_value) in attributes.items():
-            self.assertTrue(hasattr(self.place, attr))
-            if models.storage_type == 'db':
-                self.assertIsNone(getattr(self.place, attr))
+            self.assertTrue(hasattr(place, attr))
+            attr_value = getattr(place, attr)
+            if attr == "name":
+                self.assertEqual(attr_value, "Test Place")
             else:
-                attr_value = getattr(self.place, attr)
-                if attr == "name":
-                    self.assertEqual(attr_value, "Test Place")
-                else:
-                    self.assertEqual(type(attr_value), attr_type)
-                    self.assertEqual(attr_value, default_value)
+                self.assertEqual(type(attr_value), attr_type)
+                self.assertEqual(attr_value, default_value)
 
     def test_place_instance(self):
         """Test if Place is an instance of the Place class"""
