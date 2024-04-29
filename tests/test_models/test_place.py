@@ -89,8 +89,6 @@ class TestPlace(unittest.TestCase):
         place = Place()
         self.assertIsInstance(place, Place)
 
-        # Add assertions for attributes and their types
-
     def test_to_dict_creates_dict(self):
         """Test to_dict method creates a dictionary with proper attributes"""
         p = Place()

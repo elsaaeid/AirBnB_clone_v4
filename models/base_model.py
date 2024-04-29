@@ -47,11 +47,11 @@ class BaseModel(Base):
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
         new_dict = self.__dict__.copy()
-        format = "%Y-%m-%dT%H:%M:%S.%f"
+        format_t = "%Y-%m-%dT%H:%M:%S.%f"
         if "created_at" in new_dict:
-            new_dict["created_at"] = self.created_at.strftime(format)
+            new_dict["created_at"] = self.created_at.strftime(format_t)
         if "updated_at" in new_dict:
-            new_dict["updated_at"] = self.updated_at.strftime(format)
+            new_dict["updated_at"] = self.updated_at.strftime(format_t)
         new_dict["__class__"] = type(self).__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
