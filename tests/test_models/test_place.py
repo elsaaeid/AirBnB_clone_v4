@@ -112,11 +112,13 @@ class TestPlace(unittest.TestCase):
             self.assertTrue(hasattr(place, attr))
             attr_value = getattr(place, attr)
             if attr == "name":
-                self.assertEqual(attr_value, attributes[attr][1])
+                self.assertEqual(attr_value, attributes[attr][1],
+                                f"Attribute '{attr}' does not match the expected value.")
             else:
-                self.assertEqual(type(attr_value), attr_type)
-                self.assertEqual(attr_value, default_value)
-
+                self.assertEqual(type(attr_value), attr_type,
+                                f"Attribute '{attr}' has an incorrect type.")
+                self.assertEqual(attr_value, default_value,
+                                f"Attribute '{attr}' does not match the default value.")
 
     def test_place_instance(self):
         """Test if Place is an instance of the Place class"""
