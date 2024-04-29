@@ -26,9 +26,13 @@ class TestBaseModelDocs(unittest.TestCase):
             with self.subTest(path=path):
                 file_path = os.path.join(os.getcwd(), path)
                 style_guide = pep8.StyleGuide()
-                errors = style_guide.input_file(file_path)
-                self.assertEqual(errors, 0, f"PEP8 errors in {path}:
-                                 {style_guide.options.report.get_statistics()}")
+                result = style_guide.check_files([file_path])
+                errors = result.total_errors
+                if errors > 0:
+                    print(f"PEP8 errors in {path}:")
+                    for error in result.messages:
+                        print(f"- {error}")
+                self.assertEqual(errors, 0)
 
     def test_module_docstring(self):
         """Test for module docstring in BaseModel"""
