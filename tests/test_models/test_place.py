@@ -16,33 +16,62 @@ class TestPlaceDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.place_functions = inspect.getmembers(Place, inspect.isfunction)
 
-    def test_pep8_equality_place(self):
-        """Test that models/place.py conforms to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/place.py'])
-        self.assertEqual(result.total_errors, 0, "Found code style errors (and warnings)")
+    def test_pep8_equality(self):
+        """Test that place.py and test_place.py conform to PEP8"""
+        files_to_check = ['models/place.py',
+                          'tests/test_models/test_place.py']
+        style_guide = pep8.StyleGuide()
+        total_errors = 0
+        error_messages = []
 
-    def test_pep8_equality_test_place(self):
-        """Test that tests/test_models/test_place.py conforms to PEP8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['tests/test_models/test_place.py'])
-        self.assertEqual(result.total_errors, 0, "Found code style errors (and warnings)")
+        for file_path in files_to_check:
+            with self.subTest(path=file_path):
+                result = style_guide.check_files([file_path])
+                errors = result.total_errors
+
+                if errors > 0:
+                    print(f"PEP8 errors in {file_path}:")
+                    for error in result.messages:
+                        error_messages.append(f"- {error}")
+                total_errors += errors
+        if total_errors > 0:
+            error_message = f"Total PEP8 errors: {total_errors}\n"
+            error_message += "\n".join(error_messages)
+            self.fail(error_message)
 
     def test_place_module_docstring(self):
         """Test for the place.py module docstring"""
-        self.assertIsNot(models.place.__doc__, None, "place.py needs a docstring")
-        self.assertTrue(len(models.place.__doc__) >= 1, "place.py needs a docstring")
+        self.assertIsNot(
+            models.place.__doc__, None,
+            "place.py needs a docstring"
+        )
+        self.assertTrue(
+            len(models.place.__doc__) >= 1,
+            "place.py needs a docstring"
+        )
 
     def test_place_class_docstring(self):
         """Test for the Place class docstring"""
-        self.assertIsNot(Place.__doc__, None, "Place class needs a docstring")
-        self.assertTrue(len(Place.__doc__) >= 1, "Place class needs a docstring")
+        self.assertIsNot(
+            Place.__doc__, None,
+            "Place class needs a docstring"
+        )
+        self.assertTrue(
+            len(Place.__doc__) >= 1,
+            "Place class needs a docstring"
+        )
 
     def test_place_func_docstring(self):
         """Test for the presence of docstrings in Place methods"""
         for func_name, func in self.place_functions:
-            self.assertIsNot(func.__doc__, None, f"{func_name} method needs a docstring")
-            self.assertTrue(len(func.__doc__) >= 1, f"{func_name} method needs a docstring")
+            self.assertIsNot(
+                func.__doc__, None,
+                f"{func_name} method needs a docstring"
+            )
+            self.assertTrue(
+                len(func.__doc__) >= 1,
+                f"{func_name} method needs a docstring"
+            )
 
 
 class TestPlace(unittest.TestCase):
@@ -53,7 +82,9 @@ class TestPlace(unittest.TestCase):
         self.place = Place()
 
     def test_is_subclass_and_attributes(self):
-        """Test that Place is a subclass of BaseModel and has attributes"""
+        """Test that Place is a subclass of
+        BaseModel and has attributes
+        """
         place = self.place
         self.assertIsInstance(place, BaseModel)
         self.assertTrue(hasattr(place, "id"))
@@ -94,7 +125,9 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(place, Place)
 
     def test_to_dict_creates_dict(self):
-        """Test to_dict method creates a dictionary with proper attributes"""
+        """Test to_dict method creates a dictionary
+        with proper attributes
+        """
         p = Place()
         new_d = p.to_dict()
         self.assertEqual(type(new_d), dict)
@@ -105,15 +138,19 @@ class TestPlace(unittest.TestCase):
         self.assertTrue("__class__" in new_d)
 
     def test_to_dict_values(self):
-        """Test that values in dict returned from to_dict are correct"""
+        """Test that values in dict returned
+        from to_dict are correct
+        """
         t_format = "%Y-%m-%dT%H:%M:%S.%f"
         p = Place()
         new_d = p.to_dict()
         self.assertEqual(new_d["__class__"], "Place")
         self.assertEqual(type(new_d["created_at"]), str)
         self.assertEqual(type(new_d["updated_at"]), str)
-        self.assertEqual(new_d["created_at"], p.created_at.strftime(t_format))
-        self.assertEqual(new_d["updated_at"], p.updated_at.strftime(t_format))
+        self.assertEqual(new_d["created_at"],
+                         p.created_at.strftime(t_format))
+        self.assertEqual(new_d["updated_at"],
+                         p.updated_at.strftime(t_format))
 
     def test_str(self):
         """Test that the str method has the correct output"""
