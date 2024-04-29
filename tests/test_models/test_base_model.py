@@ -2,7 +2,7 @@
 import unittest
 from unittest import mock
 import inspect
-import pycodestyle
+import pep8
 import time
 from datetime import datetime
 import os
@@ -25,14 +25,10 @@ class TestBaseModelDocs(unittest.TestCase):
                     'tests/test_models/test_base_model.py']:
             with self.subTest(path=path):
                 file_path = os.path.join(os.getcwd(), path)
-                checker = pycodestyle.Checker(file_path)
-                errors = checker.check_all()
-                error_count = checker.get_count()
-                if error_count > 0:
-                    print(f"PEP8 errors in {path}:")
-                    for error in checker.report.get_statistics():
-                        print(f"- {error}")
-                self.assertEqual(error_count, 0)
+                style_guide = pep8.StyleGuide()
+                errors = style_guide.input_file(file_path)
+                self.assertEqual(errors, 0, f"PEP8 errors in {path}:
+                                 {style_guide.options.report.get_statistics()}")
 
     def test_module_docstring(self):
         """Test for module docstring in BaseModel"""
