@@ -17,41 +17,64 @@ class TestCityDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.city_functions = inspect.getmembers(City, inspect.isfunction)
 
-    def test_pep8_conformance_city(self):
+    def test_pep8_equality_city(self):
         """Test that models/city.py conforms to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['models/city.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+        self.assertEqual(
+            result.total_errors,
+            0,
+            "Found code style errors (and warnings)."
+        )
 
-    def test_pep8_conformance_test_city(self):
+    def test_pep8_equality_test_city(self):
         """Test that tests/test_models/test_city.py conforms to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['tests/test_models/test_city.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+        self.assertEqual(
+            result.total_errors,
+            0,
+            "Found code style errors (and warnings)."
+        )
 
     def test_city_module_docstring(self):
         """Test for the city.py module docstring"""
-        self.assertIsNot(city.__doc__, None,
-                         "city.py needs a docstring")
-        self.assertTrue(len(city.__doc__) >= 1,
-                        "city.py needs a docstring")
+        self.assertIsNot(
+            city.__doc__,
+            None,
+            "city.py needs a docstring"
+        )
+        self.assertTrue(
+            len(city.__doc__) >= 1,
+            "city.py needs a docstring"
+        )
 
     def test_city_class_docstring(self):
         """Test for the City class docstring"""
-        self.assertIsNot(City.__doc__, None,
-                         "City class needs a docstring")
-        self.assertTrue(len(City.__doc__) >= 1,
-                        "City class needs a docstring")
+        self.assertIsNot(
+            City.__doc__,
+            None,
+            "City class needs a docstring"
+        )
+        self.assertTrue(
+            len(City.__doc__) >= 1,
+            "City class needs a docstring"
+        )
 
-    def test_city_func_docstrings(self):
+    def test_city_func_docstring(self):
         """Test for the presence of docstrings in City methods"""
-        for func in self.city_functions:
-            self.assertIsNot(func[1].__doc__, None,
-                             "{:s} method needs a docstring".format(func[0]))
-            self.assertTrue(len(func[1].__doc__) >= 1,
-                            "{:s} method needs a docstring".format(func[0]))
+        for func_name, func in self.city_functions:
+            self.assertIsNot(
+                func.__doc__,
+                None,
+                f"{func_name} method needs a docstring"
+            )
+            self.assertTrue(
+                len(func.__doc__) >= 1,
+                f"{func_name} method needs a docstring"
+            )
+
+
 
 
 class TestCity(unittest.TestCase):
