@@ -52,7 +52,7 @@ class BaseModel(Base):
 
     def reload(self):
         """Reloads the model instance"""
-        models.storage.reload(self)
+        models.storage.reload()
 
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
