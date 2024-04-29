@@ -108,14 +108,10 @@ class TestPlace(unittest.TestCase):
             "amenity_ids": (list, []),
         }
 
-        for attr, (attr_type, default_value) in attributes.items():
+        for attr, (default_value) in attributes.items():
             self.assertTrue(hasattr(place, attr))
             attr_value = getattr(place, attr)
-            if attr == "name":
-                self.assertEqual(attr_value, attributes[attr][1])
-            else:
-                self.assertEqual(type(attr_value), attr_type)
-                self.assertEqual(attr_value, default_value)
+            self.assertEqual(attr_value, default_value)
 
     def test_place_instance(self):
         """Test if Place is an instance of the Place class"""
