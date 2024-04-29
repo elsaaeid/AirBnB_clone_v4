@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import unittest
 from models.review import Review
-from models.engine.file_storage import FileStorage
 from models import storage
 import inspect
 import models
@@ -127,8 +126,10 @@ class TestReview(unittest.TestCase):
         self.assertEqual(new_d["__class__"], "Review")
         self.assertEqual(type(new_d["created_at"]), str)
         self.assertEqual(type(new_d["updated_at"]), str)
-        self.assertEqual(new_d["created_at"], review.created_at.strftime(t_format))
-        self.assertEqual(new_d["updated_at"], review.updated_at.strftime(t_format))
+        self.assertEqual(new_d["created_at"],
+                         review.created_at.strftime(t_format))
+        self.assertEqual(new_d["updated_at"],
+                         review.updated_at.strftime(t_format))
 
     def test_str(self):
         """test that the str method has the correct output"""
