@@ -30,15 +30,13 @@ class TestBaseModelDocs(unittest.TestCase):
             with self.subTest(path=file_path):
                 result = style_guide.check_files([file_path])
                 errors = result.total_errors
-
                 if errors > 0:
                     print(f"PEP8 errors in {file_path}:")
                     for error in result.messages:
                         print(f"- {error}")
-
                 total_errors += errors
-
-        self.assertEqual(total_errors, 0)
+        self.assertEqual(total_errors, 0,
+                         f"Total PEP8 errors: {total_errors}")
 
     def test_module_docstring(self):
         """Test for module docstring in BaseModel"""
