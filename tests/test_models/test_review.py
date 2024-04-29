@@ -93,17 +93,18 @@ class TestReview(unittest.TestCase):
 
     def test_review_attributes(self):
         """Test Review attributes"""
-        self.assertTrue(hasattr(self.review, "place_id"))
-        self.assertTrue(hasattr(self.review, "user_id"))
-        self.assertTrue(hasattr(self.review, "text"))
+        review = self.review
+        self.assertTrue(hasattr(review, "place_id"))
+        self.assertTrue(hasattr(review, "user_id"))
+        self.assertTrue(hasattr(review, "text"))
         if models.storage_type == 'db':
-            self.assertIsNone(self.review.place_id)
-            self.assertIsNone(self.review.user_id)
-            self.assertIsNone(self.review.text)
+            self.assertIsNone(review.place_id)
+            self.assertIsNone(review.user_id)
+            self.assertIsNone(review.text)
         else:
-            self.assertEqual(self.review.place_id, "")
-            self.assertEqual(self.review.user_id, "")
-            self.assertEqual(self.review.text, "")
+            self.assertEqual(review.place_id, "")
+            self.assertEqual(review.user_id, "")
+            self.assertEqual(review.text, "")
 
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
