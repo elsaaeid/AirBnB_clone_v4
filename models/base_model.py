@@ -51,8 +51,10 @@ class BaseModel(Base):
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
         new_dict = self.__dict__.copy()
-        new_dict["created_at"] = new_dict["created_at"].strftime("%Y-%m-%dT%H:%M:%S.%f")
-        new_dict["updated_at"] = new_dict["updated_at"].strftime("%Y-%m-%dT%H:%M:%S.%f")
+        new_dict["created_at"] = new_dict["created_at"].strftime
+        ("%Y-%m-%dT%H:%M:%S.%f")
+        new_dict["updated_at"] = new_dict["updated_at"].strftime
+        ("%Y-%m-%dT%H:%M:%S.%f")
         new_dict["__class__"] = type(self).__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
