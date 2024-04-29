@@ -16,17 +16,28 @@ class TestStateDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.state_functions = inspect.getmembers(State, inspect.isfunction)
 
-    def test_pep8_equality_state(self):
-        """Test that models/state.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/state.py'])
-        self.assertEqual(result.total_errors, 0, "Found code style errors (and warnings).")
+    def test_pep8_equality(self):
+        """Test that base_model.py and test_base_model.py conform to PEP8"""
+        files_to_check = ['models/state.py',
+                          'tests/test_models/test_state.py']
+        style_guide = pep8.StyleGuide()
+        total_errors = 0
+        error_messages = []
 
-    def test_pep8_equality_test_state(self):
-        """Test that tests/test_models/test_state.py conforms to PEP8."""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['tests/test_models/test_state.py'])
-        self.assertEqual(result.total_errors, 0, "Found code style errors (and warnings).")
+        for file_path in files_to_check:
+            with self.subTest(path=file_path):
+                result = style_guide.check_files([file_path])
+                errors = result.total_errors
+
+                if errors > 0:
+                    print(f"PEP8 errors in {file_path}:")
+                    for error in result.messages:
+                        error_messages.append(f"- {error}")
+                total_errors += errors
+        if total_errors > 0:
+            error_message = f"Total PEP8 errors: {total_errors}\n"
+            error_message += "\n".join(error_messages)
+            self.fail(error_message)
 
     def test_state_module_docstring(self):
         """Test for the state.py module docstring"""
