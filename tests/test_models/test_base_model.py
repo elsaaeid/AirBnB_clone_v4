@@ -4,7 +4,8 @@ import inspect
 import pycodestyle
 from datetime import datetime
 import os
-from models.base_model import BaseModel
+import models
+BaseModel = models.base_model.BaseModel
 import time
 from unittest import mock
 
