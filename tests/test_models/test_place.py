@@ -112,7 +112,7 @@ class TestPlace(unittest.TestCase):
             self.assertTrue(hasattr(place, attr))
             attr_value = getattr(place, attr)
             if attr == "name":
-                self.assertEqual(attr_value, "Test Place")
+                self.assertEqual(attr_value, attributes[attr][1])
             else:
                 self.assertEqual(type(attr_value), attr_type)
                 self.assertEqual(attr_value, default_value)
