@@ -169,11 +169,11 @@ class TestBaseModel(unittest.TestCase):
         my_model.my_number = 89
         new_dict = my_model.to_dict()
         expected_attributes = ["id",
-                          "created_at",
-                          "updated_at",
-                          "name",
-                          "my_number",
-                          "__class__"]
+                               "created_at",
+                               "updated_at",
+                               "name",
+                               "my_number",
+                               "__class__"]
         self.assertCountEqual(new_dict.keys(), expected_attributes)
         self.assertEqual(new_dict['__class__'], 'BaseModel')
         self.assertEqual(new_dict['name'], "Holberton")
