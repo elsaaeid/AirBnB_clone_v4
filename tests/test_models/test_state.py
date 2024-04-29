@@ -103,7 +103,9 @@ class TestState(unittest.TestCase):
             self.assertEqual(state.name, "")
 
     def test_to_dict_creates_dict(self):
-        """Test if to_dict method creates a dictionary with proper attributes"""
+        """Test if to_dict method creates
+        a dictionary with proper attributes
+        """
         s = State()
         new_d = s.to_dict()
         self.assertEqual(type(new_d), dict)
