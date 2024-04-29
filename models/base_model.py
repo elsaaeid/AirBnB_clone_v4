@@ -47,8 +47,8 @@ class BaseModel(Base):
     def save(self):
         """Updates the updated_at"""
         self.updated_at = datetime.now()
-        models.storage_type.new(self)
-        models.storage_type.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
@@ -66,8 +66,8 @@ class BaseModel(Base):
 
     def delete(self):
         """Delete the current instance from the storage"""
-        models.storage_type.delete(self)
+        models.storage.delete(self)
 
     def reload(self):
         """Reloads the model instance"""
-        models.storage_type.reload(self)
+        models.storage.reload(self)
