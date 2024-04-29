@@ -48,10 +48,10 @@ class BaseModel(Base):
         """Converts instance into dict format"""
         new_dict = self.__dict__.copy()
         format_t = "%Y-%m-%dT%H:%M:%S.%f"
-        if "created_at" in new_dict:
-            new_dict["created_at"] = self.created_at.strftime(format_t)
-        if "updated_at" in new_dict:
-            new_dict["updated_at"] = self.updated_at.strftime(format_t)
+        if "created_at" in new_dict and isinstance(new_dict["created_at"], datetime):
+            new_dict["created_at"] = new_dict["created_at"].strftime(format_t)
+        if "updated_at" in new_dict and isinstance(new_dict["updated_at"], datetime):
+            new_dict["updated_at"] = new_dict["updated_at"].strftime(format_t)
         new_dict["__class__"] = type(self).__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
