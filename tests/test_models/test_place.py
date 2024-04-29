@@ -60,6 +60,30 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(place, "created_at"))
         self.assertTrue(hasattr(place, "updated_at"))
 
+    def test_place_attributes(self):
+        """Test Place attributes"""
+        attributes = {
+            "city_id": (str, ""),
+            "user_id": (str, ""),
+            "name": (str, "Test Place"),
+            "description": (str, ""),
+            "number_rooms": (int, 0),
+            "number_bathrooms": (int, 0),
+            "max_guest": (int, 0),
+            "price_by_night": (int, 0),
+            "latitude": (float, 0.0),
+            "longitude": (float, 0.0),
+            "amenity_ids": (list, []),
+        }
+
+        for attr, (attr_type, default_value) in attributes.items():
+            self.assertTrue(hasattr(self.place, attr))
+            if models.storage_type == 'db':
+                self.assertIsNone(getattr(self.place, attr))
+            else:
+                self.assertEqual(type(getattr(self.place, attr)), attr_type)
+                self.assertEqual(getattr(self.place, attr), default_value)
+
     def test_place_instance(self):
         """Test if Place is an instance of the Place class"""
         place = Place()

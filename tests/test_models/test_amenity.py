@@ -85,54 +85,17 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(hasattr(amenity, "created_at"))
         self.assertTrue(hasattr(amenity, "updated_at"))
 
-import unittest
-import models  # Assuming the models module is imported
-
-class TestAmenity(unittest.TestCase):
-    """Tests for the Amenity class"""
-import unittest
-import models  # Assuming the models module is imported
-
-class TestPlace(unittest.TestCase):
-    """Tests for the Place class"""
-
-    @classmethod
-    def setUpClass(cls):
-        """Set up for the test case"""
-        cls.place = Place()
-
     def setUp(self):
-        """Set up a variable"""
-        self.place = Place(name="Test Place")
+        """Set up the test environment"""
+        self.amenity = Amenity()
 
-    def tearDown(self):
-        """Clean up after test cases"""
-        del self.place
-        storage.delete(self.place)
-
-    def test_place_attributes(self):
-        """Test Place attributes"""
-        attributes = {
-            "city_id": (str, ""),
-            "user_id": (str, ""),
-            "name": (str, "Test Place"),
-            "description": (str, ""),
-            "number_rooms": (int, 0),
-            "number_bathrooms": (int, 0),
-            "max_guest": (int, 0),
-            "price_by_night": (int, 0),
-            "latitude": (float, 0.0),
-            "longitude": (float, 0.0),
-            "amenity_ids": (list, []),
-        }
-
-        for attr, (attr_type, default_value) in attributes.items():
-            self.assertTrue(hasattr(self.place, attr))
-            if models.storage_type == 'db':
-                self.assertIsNone(getattr(self.place, attr))
-            else:
-                self.assertEqual(type(getattr(self.place, attr)), attr_type)
-                self.assertEqual(getattr(self.place, attr), default_value)
+    def test_is_subclass_and_attributes(self):
+        """Test that Place is a subclass of BaseModel and has attributes"""
+        amenity = self.amenity
+        self.assertIsInstance(amenity, BaseModel)
+        self.assertTrue(hasattr(amenity, "id"))
+        self.assertTrue(hasattr(amenity, "created_at"))
+        self.assertTrue(hasattr(amenity, "updated_at"))
 
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
