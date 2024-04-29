@@ -127,7 +127,7 @@ class TestBaseModel(unittest.TestCase):
         model_id = model.id  # Get the ID before deletion
         model.delete()
         # Check if the model instance is no longer present in the storage
-        self.assertNotIn(model_id, models.storage.all(BaseModel))
+        self.assertNotIn(model_id, models.storage_type.all(BaseModel))
 
     def test_new_instance(self):
         """Test if a new instance of BaseModel is created"""
