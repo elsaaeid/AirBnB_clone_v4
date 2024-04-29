@@ -79,17 +79,16 @@ class TestReview(unittest.TestCase):
     """Test the Review class"""
 
     def test_is_subclass(self):
-        """Test if Review is a subclass of BaseModel"""
+        """Test that Review is a subclass of BaseModel"""
         review = Review()
         self.assertIsInstance(review, BaseModel)
         self.assertTrue(hasattr(review, "id"))
         self.assertTrue(hasattr(review, "created_at"))
         self.assertTrue(hasattr(review, "updated_at"))
 
-    def test_review_instance(self):
-        """Test if Review is an instance of the Review class"""
-        review = Review()
-        self.assertIsInstance(review, Review)
+    def setUp(self):
+        """Set up the test environment"""
+        self.review = Review()
 
     def test_review_attributes(self):
         """Test Review attributes"""
@@ -108,11 +107,11 @@ class TestReview(unittest.TestCase):
 
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
-        r = Review()
-        new_d = r.to_dict()
+        review = Review()
+        new_d = review.to_dict()
         self.assertEqual(type(new_d), dict)
         self.assertFalse("_sa_instance_state" in new_d)
-        for attr in r.__dict__:
+        for attr in review.__dict__:
             if attr is not "_sa_instance_state":
                 self.assertTrue(attr in new_d)
         self.assertTrue("__class__" in new_d)
@@ -120,13 +119,13 @@ class TestReview(unittest.TestCase):
     def test_to_dict_values(self):
         """test that values in dict returned from to_dict are correct"""
         t_format = "%Y-%m-%dT%H:%M:%S.%f"
-        r = Review()
-        new_d = r.to_dict()
+        review = Review()
+        new_d = review.to_dict()
         self.assertEqual(new_d["__class__"], "Review")
         self.assertEqual(type(new_d["created_at"]), str)
         self.assertEqual(type(new_d["updated_at"]), str)
-        self.assertEqual(new_d["created_at"], r.created_at.strftime(t_format))
-        self.assertEqual(new_d["updated_at"], r.updated_at.strftime(t_format))
+        self.assertEqual(new_d["created_at"], review.created_at.strftime(t_format))
+        self.assertEqual(new_d["updated_at"], review.updated_at.strftime(t_format))
 
     def test_str(self):
         """test that the str method has the correct output"""
