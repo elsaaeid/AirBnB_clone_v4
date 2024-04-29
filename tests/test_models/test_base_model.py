@@ -7,7 +7,7 @@ from datetime import datetime
 import os
 import models
 BaseModel = models.base_model.BaseModel
-module_doc = models.base_model.__doc__
+
 
 
 
