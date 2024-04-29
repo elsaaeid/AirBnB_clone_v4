@@ -133,8 +133,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(new_model, BaseModel)
 
     def test_datetime_attributes(self):
-        """Test that two BaseModel instances have different datetime objects
-        and that upon creation have identical updated_at and created_at value."""
+        """Test that two BaseModel instances"""
         tic = datetime.utcnow()
         model1 = BaseModel()
         toc = datetime.utcnow()
