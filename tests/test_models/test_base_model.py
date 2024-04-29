@@ -22,7 +22,7 @@ class TestBaseModelDocs(unittest.TestCase):
     def test_pep8_equality(self):
         """Test that base_model.py and test_base_model.py conform to PEP8"""
         for path in ['models/base_model.py',
-                'tests/test_models/test_base_model.py']:
+                     'tests/test_models/test_base_model.py']:
             with self.subTest(path=path):
                 errors = pycodestyle.Checker(path).check_all()
                 self.assertEqual(errors, 0)
@@ -31,16 +31,16 @@ class TestBaseModelDocs(unittest.TestCase):
         """Test for module docstring in BaseModel"""
         module_doc = inspect.getdoc(BaseModel)
         self.assertIsNot(module_doc, None,
-                "base_model.py needs a docstring")
+                         "base_model.py needs a docstring")
         self.assertTrue(len(module_doc) > 1,
-                "base_model.py needs a docstring")
+                        "base_model.py needs a docstring")
 
     def test_class_docstring(self):
         """Test for class docstring in BaseModel"""
         self.assertIsNot(BaseModel.__doc__, None,
-                "BaseModel class needs a docstring")
+                         "BaseModel class needs a docstring")
         self.assertTrue(len(BaseModel.__doc__) >= 1,
-                "BaseModel class needs a docstring")
+                        "BaseModel class needs a docstring")
 
     def test_func_docstring(self):
         """Test for docstrings in BaseModel methods"""
@@ -86,7 +86,7 @@ class TestBaseModel(unittest.TestCase):
         model = BaseModel()
         string_representation = str(model)
         self.assertEqual(string_representation,
-                f"[BaseModel] ({model.id}) {model.__dict__}")
+                         f"[BaseModel] ({model.id}) {model.__dict__}")
 
     @mock.patch('models.storage')
     def test_save(self, mock_storage):
@@ -189,9 +189,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(new_dict["created_at"]), str)
         self.assertEqual(type(new_dict["updated_at"]), str)
         self.assertEqual(new_dict["created_at"],
-                 my_model.created_at.strftime(t_format))
+                         my_model.created_at.strftime(t_format))
         self.assertEqual(new_dict["updated_at"],
-                 my_model.updated_at.strftime(t_format))
+                         my_model.updated_at.strftime(t_format))
 
 if __name__ == '__main__':
     unittest.main
