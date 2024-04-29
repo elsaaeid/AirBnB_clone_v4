@@ -7,6 +7,7 @@ import models
 from models.base_model import BaseModel
 import pep8
 
+
 class TestReviewDocs(unittest.TestCase):
     """Tests to check the documentation and style of Review class"""
 
@@ -74,7 +75,6 @@ class TestReviewDocs(unittest.TestCase):
                 len(func.__doc__) >= 1,
                 f"{func_name} method needs a docstring"
             )
-
 
 
 class TestReview(unittest.TestCase):
