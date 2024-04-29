@@ -13,6 +13,7 @@ if models.storage_type == "db":
 else:
     Base = object
 
+
 class BaseModel(Base):
     """Base model that all classes will inherit from"""
     __abstract__ = True
