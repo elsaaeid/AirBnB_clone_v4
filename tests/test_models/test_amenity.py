@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-from datetime import datetime
 import inspect
 import pep8
 import unittest
 from models.amenity import Amenity
 from models import storage
 from models.base_model import BaseModel
+
 
 class TestAmenityDocs(unittest.TestCase):
     """Tests to check the documentation and style of Amenity class"""
@@ -71,7 +71,6 @@ class TestAmenityDocs(unittest.TestCase):
                 len(func.__doc__) >= 1,
                 f"{func_name} method needs a docstring"
             )
-
 
 
 class TestAmenity(unittest.TestCase):
