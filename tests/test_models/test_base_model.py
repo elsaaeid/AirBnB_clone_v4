@@ -21,18 +21,24 @@ class TestBaseModelDocs(unittest.TestCase):
 
     def test_pep8_equality(self):
         """Test that base_model.py and test_base_model.py conform to PEP8"""
-        for path in ['models/base_model.py',
-                    'tests/test_models/test_base_model.py']:
-            with self.subTest(path=path):
-                file_path = os.path.join(os.getcwd(), path)
-                style_guide = pep8.StyleGuide()
+        files_to_check = ['models/base_model.py',
+                          'tests/test_models/test_base_model.py']
+        style_guide = pep8.StyleGuide()
+        total_errors = 0
+
+        for file_path in files_to_check:
+            with self.subTest(path=file_path):
                 result = style_guide.check_files([file_path])
                 errors = result.total_errors
+
                 if errors > 0:
-                    print(f"PEP8 errors in {path}:")
+                    print(f"PEP8 errors in {file_path}:")
                     for error in result.messages:
                         print(f"- {error}")
-                self.assertEqual(errors, 0)
+
+                total_errors += errors
+
+        self.assertEqual(total_errors, 0)
 
     def test_module_docstring(self):
         """Test for module docstring in BaseModel"""
