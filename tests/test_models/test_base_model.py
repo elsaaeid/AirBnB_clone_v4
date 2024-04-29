@@ -21,7 +21,8 @@ class TestBaseModelDocs(unittest.TestCase):
 
     def test_pep8_equality(self):
         """Test that base_model.py and test_base_model.py conform to PEP8"""
-        files_to_check = ['models/base_model.py', 'tests/test_models/test_base_model.py']
+        files_to_check = ['models/base_model.py',
+                          'tests/test_models/test_base_model.py']
         style_guide = pep8.StyleGuide()
         total_errors = 0
         error_messages = []
