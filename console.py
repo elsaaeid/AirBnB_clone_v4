@@ -24,6 +24,7 @@ classes = {
     "User": User
 }
 
+
 class HBNBCommand(cmd.Cmd):
     """this class for the command interpreter"""
     prompt = '(hbnb)'
