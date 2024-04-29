@@ -192,5 +192,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(new_dict["updated_at"],
                          my_model.updated_at.strftime(t_format))
 
+
 if __name__ == '__main__':
     unittest.main
