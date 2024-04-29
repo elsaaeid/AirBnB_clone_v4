@@ -50,6 +50,10 @@ class BaseModel(Base):
         models.storage.new(self)
         models.storage.save()
 
+    def reload(self):
+        """Reloads the model instance"""
+        models.storage.reload(self)
+
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
         new_dict = self.__dict__.copy()
@@ -68,6 +72,3 @@ class BaseModel(Base):
         """Delete the current instance from the storage"""
         models.storage.delete(self)
 
-    def reload(self):
-        """Reloads the model instance"""
-        models.storage.reload(self)
