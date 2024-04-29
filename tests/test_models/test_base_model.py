@@ -114,14 +114,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(initial_updated_at, new_updated_at)
         self.assertTrue(mock_storage.save.called)
 
-    def test_reload(self):
-        """Test if the reload function works for BaseModel"""
-        model = BaseModel()
-        model.save()
-        initial_updated_at = model.updated_at
-        model.reload()
-        self.assertEqual(initial_updated_at, model.updated_at)
-
     def test_attributes(self):
         """Test if BaseModel has the expected attributes"""
         model = BaseModel()

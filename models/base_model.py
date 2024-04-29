@@ -44,10 +44,6 @@ class BaseModel(Base):
         models.storage.new(self)
         models.storage.save()
 
-    def reload(self):
-        """Reloads the model instance"""
-        models.storage.reload()
-
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
         new_dict = self.__dict__.copy()
