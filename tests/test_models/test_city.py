@@ -48,10 +48,15 @@ class TestCityDocs(unittest.TestCase):
 
     def test_city_class_docstring(self):
         """Test for the City class docstring"""
-        self.assertIsNot(City.__doc__, None,
-                         "City class needs a docstring")
-        self.assertTrue(len(City.__doc__) >= 1,
-                "City class needs a docstring")
+        self.assertIsNot(
+            City.__doc__,
+            None,
+            "City class needs a docstring"
+        )
+        self.assertTrue(
+            len(City.__doc__) >= 1,
+            "City class needs a docstring"
+        )
 
     def test_city_func_docstring(self):
         """Test for the presence of docstrings in City methods"""
