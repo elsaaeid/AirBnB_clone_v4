@@ -17,7 +17,7 @@ class TestStateDocs(unittest.TestCase):
         cls.state_functions = inspect.getmembers(State, inspect.isfunction)
 
     def test_pep8_equality(self):
-        """Test that base_model.py and test_base_model.py conform to PEP8"""
+        """Test that state.py and test_state.py conform to PEP8"""
         files_to_check = ['models/state.py',
                           'tests/test_models/test_state.py']
         style_guide = pep8.StyleGuide()
@@ -41,20 +41,40 @@ class TestStateDocs(unittest.TestCase):
 
     def test_state_module_docstring(self):
         """Test for the state.py module docstring"""
-        self.assertIsNot(State.__doc__, None, "state.py needs a docstring")
-        self.assertTrue(len(State.__doc__) >= 1, "state.py needs a docstring")
+        self.assertIsNot(
+            State.__doc__,
+            None,
+            "state.py needs a docstring"
+        )
+        self.assertTrue(
+            len(State.__doc__) >= 1,
+            "state.py needs a docstring"
+        )
 
     def test_state_class_docstring(self):
         """Test for the State class docstring"""
-        self.assertIsNot(State.__doc__, None, "State class needs a docstring")
-        self.assertTrue(len(State.__doc__) >= 1, "State class needs a docstring")
+        self.assertIsNot(
+            State.__doc__,
+            None,
+            "State class needs a docstring"
+        )
+        self.assertTrue(
+            len(State.__doc__) >= 1,
+            "State class needs a docstring"
+        )
 
     def test_state_func_docstring(self):
         """Test for the presence of docstrings in State methods"""
         for func_name, func in self.state_functions:
-            self.assertIsNot(func.__doc__, None, f"{func_name} method needs a docstring")
-            self.assertTrue(len(func.__doc__) >= 1, f"{func_name} method needs a docstring")
-
+            self.assertIsNot(
+                func.__doc__,
+                None,
+                f"{func_name} method needs a docstring"
+            )
+            self.assertTrue(
+                len(func.__doc__) >= 1,
+                f"{func_name} method needs a docstring"
+            )
 
 
 class TestState(unittest.TestCase):

@@ -17,7 +17,7 @@ class TestReviewDocs(unittest.TestCase):
         cls.review_functions = inspect.getmembers(Review, inspect.isfunction)
 
     def test_pep8_equality(self):
-        """Test that base_model.py and test_base_model.py conform to PEP8"""
+        """Test that review.py and test_review.py conform to PEP8"""
         files_to_check = ['models/review.py',
                           'tests/test_models/test_review.py']
         style_guide = pep8.StyleGuide()
