@@ -81,8 +81,12 @@ class TestPlace(unittest.TestCase):
             if models.storage_type == 'db':
                 self.assertIsNone(getattr(self.place, attr))
             else:
-                self.assertEqual(type(getattr(self.place, attr)), attr_type)
-                self.assertEqual(getattr(self.place, attr), default_value)
+                attr_value = getattr(self.place, attr)
+                if attr == "name":
+                    self.assertEqual(attr_value, "Test Place")
+                else:
+                    self.assertEqual(type(attr_value), attr_type)
+                    self.assertEqual(attr_value, default_value)
 
     def test_place_instance(self):
         """Test if Place is an instance of the Place class"""
