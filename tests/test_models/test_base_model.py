@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import unittest
+from unittest import mock
 import inspect
 import pycodestyle
 import time
@@ -82,7 +83,7 @@ class TestBaseModel(unittest.TestCase):
         string_representation = str(model)
         self.assertEqual(string_representation, f"[BaseModel] ({model.id}) {model.__dict__}")
 
-    @unittest.mock.patch('models.storage')
+    @mock.patch('models.storage')
     def test_save(self, mock_storage):
         """Test that save method updates `updated_at` and calls
         `storage.save`"""
