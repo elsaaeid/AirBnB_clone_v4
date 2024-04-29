@@ -10,8 +10,8 @@ class TestConsoleDocs(unittest.TestCase):
 
     def test_pep8_equality(self):
         """Test that console.py and test_console.py conform to PEP8"""
-        files_to_check = ['models/console.py',
-                            'tests/test_models/test_console.py']
+        files_to_check = ['console.py',
+                            'tests/test_console.py']
         style_guide = pep8.StyleGuide()
         total_errors = 0
         error_messages = []
