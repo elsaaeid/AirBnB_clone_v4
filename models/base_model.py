@@ -79,17 +79,11 @@ class BaseModel(Base):
                         setattr(cls, obj_id, instance)
 
     def save(self):
-        """Updates the updated_at and serializes instances to a JSON file"""
-        file_path = "file.json"
-        data = {}
-        if os.path.exists(file_path):
-            with open(file_path, 'r') as file:
-                data = json.load(file)
-        obj_data = self.to_dict(secure_pwd=False)
-        data[obj_data['id']] = obj_data
-        with open(file_path, 'w') as file:
-            json.dump(data, file)
-        self.updated_at = datetime.utcnow()
+        """Updates the updated_at and serializes
+        instances to a JSON file
+        """
+        if models.storage_type != 'db':
+            self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
 
