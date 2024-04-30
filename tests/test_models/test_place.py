@@ -125,11 +125,11 @@ class TestPlace(unittest.TestCase):
 
     def test_to_dict(self):
         """Test to_dict method creates a dictionary"""
-        p = Place()
-        new_d = p.to_dict()
+        place = Place()
+        new_d = place.to_dict()
         self.assertEqual(type(new_d), dict)
         self.assertFalse("_sa_instance_state" in new_d)
-        for attr in p.__dict__:
+        for attr in place.__dict__:
             if attr != "_sa_instance_state":
                 self.assertTrue(attr in new_d)
         self.assertTrue("__class__" in new_d)

@@ -108,11 +108,11 @@ class TestState(unittest.TestCase):
 
     def test_to_dict(self):
         """Test if to_dict method creates a dictionary"""
-        s = State()
-        new_dict = s.to_dict()
+        state = State()
+        new_dict = state.to_dict()
         self.assertEqual(type(new_dict), dict)
         self.assertNotIn("_sa_instance_state", new_dict)
-        for attr in s.__dict__:
+        for attr in state.__dict__:
             if attr != "_sa_instance_state":
                 self.assertIn(attr, new_dict)
         self.assertIn("__class__", new_dict)
