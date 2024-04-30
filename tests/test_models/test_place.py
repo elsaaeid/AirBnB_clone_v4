@@ -112,8 +112,8 @@ class TestPlace(unittest.TestCase):
         for attr, (attr_type, default_value) in attributes.items():
             self.assertTrue(hasattr(place, attr))
             attr_value = getattr(place, attr)
-            if attr == "name":
-                self.assertEqual(attr_value, attributes[attr][1])
+            if models.storage_type == 'db':
+                self.assertEqual(attr_value, None)
             else:
                 self.assertEqual(type(attr_value), attr_type)
                 self.assertEqual(attr_value, default_value)
