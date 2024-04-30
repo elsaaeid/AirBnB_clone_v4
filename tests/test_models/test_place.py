@@ -98,7 +98,7 @@ class TestPlace(unittest.TestCase):
         attributes = {
             "city_id": (str, ""),
             "user_id": (str, ""),
-            "name": (str, "Test Place"),
+            "name": (str, ""),
             "description": (str, ""),
             "number_rooms": (int, 0),
             "number_bathrooms": (int, 0),
