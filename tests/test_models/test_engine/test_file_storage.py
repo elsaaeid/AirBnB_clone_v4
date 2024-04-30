@@ -136,4 +136,5 @@ class TestFileStorage(unittest.TestCase):
         instance_key = f"{new_instance.__class__.__name__}.{new_instance.id}"
         retrieved_instance = models.storage_type.get(BaseModel, instance_key)
         self.assertEqual(new_instance, retrieved_instance)
-        self.assertEqual(models.storage_type.count(), len(models.storage_type.all()))
+        self.assertEqual(models.storage_type.count(),
+                         len(models.storage_type.all()))
