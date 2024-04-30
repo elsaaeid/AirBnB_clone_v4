@@ -9,6 +9,7 @@ from models.base_model import BaseModel
 
 module_doc = BaseModel.__doc__
 
+
 class TestBaseModelDocs(unittest.TestCase):
     """Tests for the documentation
     and style of BaseModel class"""
