@@ -1,19 +1,11 @@
 #!/usr/bin/python3
 
 """this the entry point of the command interpreter"""
-
 import cmd
 import shlex
 from models import storage
 from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
-import json
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -36,10 +28,10 @@ class HBNBCommand(cmd.Cmd):
         """create is command used to create a new instance."""
         if not arg:
             print("** class name missing **")
-        elif arg in classes:
-            for key, value in classes.items():
+        elif arg in storage.classes:
+            for key, value in storage.classes.items():
                 if key == arg:
-                    new_instance = classes[key]()
+                    new_instance = storage.classes[key]()
             storage.save()
             print(new_instance.id)
         else:
@@ -50,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         my_arg = arg.split(" ")
         if not arg:
             print("** class name missing **")
-        elif my_arg[0] not in classes:
+        elif my_arg[0] not in storage.classes:
             print("** class doesn't exist **")
         elif len(my_arg) >= 1:
             try:
@@ -72,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
         my_arg = arg.split(" ")
         if not arg:
             print("** class name missing **")
-        elif my_arg[0] not in classes:
+        elif my_arg[0] not in storage.classes:
             print("** class doesn't exist **")
         elif len(my_arg) >= 1:
             try:
@@ -96,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
             for key, values in my_objects.items():
                 my_list.append(str(values))
             print(my_list)
-        elif my_arg[0] not in classes:
+        elif my_arg[0] not in storage.classes:
             print("** class doesn't exist **")
         else:
             my_list = []
@@ -119,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(my_arg) == 3:
             print("** value missing **")
-        elif my_arg[0] not in classes:
+        elif my_arg[0] not in storage.classes:
             print("** class doesn't exist **")
         else:
             my_objects = FileStorage.all(self)
@@ -143,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
             for key, values in my_objects.items():
                 my_list.append(str(values))
             print(my_list)
-        elif my_arg[0] not in classes:
+        elif my_arg[0] not in storage.classes:
             print("** class doesn't exist **")
         else:
             my_list = []
