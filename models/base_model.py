@@ -40,12 +40,6 @@ class BaseModel(Base):
         cls = type(self).__name__
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
-    def save(self):
-        """Updates the updated_at"""
-        self.updated_at = datetime.utcnow()
-        models.storage.new(self)
-        models.storage.save()
-
     def to_dict(self, secure_pwd=True):
         """Converts instance into dict format"""
         new_dict = self.__dict__.copy()
@@ -84,8 +78,8 @@ class BaseModel(Base):
                         instance = cls(**obj_data)
                         setattr(cls, obj_id, instance)
 
-    def save_file(self):
-        """Serializes instances to a JSON file"""
+    def save(self):
+        """Updates the updated_at and serializes instances to a JSON file"""
         file_path = "file.json"
         data = {}
         if os.path.exists(file_path):
@@ -95,6 +89,9 @@ class BaseModel(Base):
         data[obj_data['id']] = obj_data
         with open(file_path, 'w') as file:
             json.dump(data, file)
+        self.updated_at = datetime.utcnow()
+        models.storage.new(self)
+        models.storage.save()
 
     def delete(self):
         """Delete the current instance from the storage"""
