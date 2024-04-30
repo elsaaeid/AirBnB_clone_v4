@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-import uuid
+import json
+import os
 from datetime import datetime
+import uuid
 from hashlib import md5
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -59,6 +61,34 @@ class BaseModel(Base):
         if secure_pwd and models.storage_type == "db":
             del new_dict['password']
         return new_dict
+
+    def reload(cls):
+        """Deserializes the JSON file to instances"""
+        file_path = "file.json"  # Replace with the actual file path
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+                for obj_id, obj_data in data.items():
+                    if obj_data['__class__'] == cls.__name__:
+                        del obj_data['__class__']
+                        obj_data['created_at'] = datetime.strptime(obj_data['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
+                        obj_data['updated_at'] = datetime.strptime(obj_data['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
+                        if 'password' in obj_data:
+                            obj_data['password'] = md5(obj_data['password'].encode()).hexdigest()
+                        instance = cls(**obj_data)
+                        setattr(cls, obj_id, instance)
+
+    def save(self):
+        """Serializes instances to a JSON file"""
+        file_path = "file.json"
+        data = {}
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+        obj_data = self.to_dict(secure_pwd=False)
+        data[obj_data['id']] = obj_data
+        with open(file_path, 'w') as file:
+            json.dump(data, file)
 
     def delete(self):
         """Delete the current instance from the storage"""
