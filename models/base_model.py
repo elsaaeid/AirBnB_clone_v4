@@ -60,8 +60,9 @@ class BaseModel(Base):
             del new_dict["_sa_instance_state"]
         if secure_pwd and models.storage_type == "db":
             del new_dict['password']
-        return new_dict
+        return 
 
+    @classmethod
     def reload(cls):
         """Deserializes the JSON file to instances"""
         file_path = "file.json"
