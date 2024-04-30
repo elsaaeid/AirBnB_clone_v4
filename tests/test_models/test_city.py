@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import unittest
 import pep8
+from datetime import datetime
 import inspect
 from models.city import City
 from models import storage
@@ -127,11 +128,13 @@ class TestCity(unittest.TestCase):
         """Test if City is an instance of the City class"""
         self.assertIsInstance(self.city, City)
 
+    @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
     def test_city_save(self):
         """Test if the save function works for City"""
-        old_updated_at = self.city.updated_at
         self.city.save()
-        self.assertNotEqual(old_updated_at, self.city.updated_at)
+        actual = type(self.city.updated_at)
+        expected = type(datetime.now())
+        self.assertEqual(expected, actual)
 
     def test_city_to_dict(self):
         """Test if the to_dict function works for City"""

@@ -2,6 +2,7 @@
 import unittest
 import pep8
 import inspect
+from datetime import datetime
 from models.place import Place
 from models import storage
 from models.base_model import BaseModel
@@ -165,6 +166,14 @@ class TestPlace(unittest.TestCase):
         all_places = storage.all(Place)
         place_key = "Place." + self.place.id
         self.assertIn(place_key, all_places)
+
+    @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
+    def test_updated_at_save(self):
+        """Test function to save updated_at attribute"""
+        self.place.save()
+        actual = type(self.place.updated_at)
+        expected = type(datetime.now())
+        self.assertEqual(expected, actual)
 
     def test_place_to_dict(self):
         """Test if the to_dict function works for Place"""

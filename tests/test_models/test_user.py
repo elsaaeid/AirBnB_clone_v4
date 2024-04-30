@@ -2,6 +2,7 @@
 import unittest
 import inspect
 import models
+from datetime import datetime
 from models import user
 from models.base_model import BaseModel
 import pep8
@@ -121,6 +122,14 @@ class TestUser(unittest.TestCase):
         all_users = storage.all(User)
         user_key = "User." + self.user.id
         self.assertIn(user_key, all_users)
+
+    @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
+    def test_updated_at_save(self):
+        """Test function to save updated_at attribute"""
+        self.user.save()
+        actual = type(self.user.updated_at)
+        expected = type(datetime.now())
+        self.assertEqual(expected, actual)
 
     def test_user_to_dict(self):
         """Test if the to_dict function works for User"""

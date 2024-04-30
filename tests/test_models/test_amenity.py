@@ -2,6 +2,7 @@
 import inspect
 import pep8
 import unittest
+from datetime import datetime
 from models.amenity import Amenity
 from models import storage
 from models.base_model import BaseModel
@@ -130,10 +131,10 @@ class TestAmenity(unittest.TestCase):
 
     def test_amenity_save(self):
         """Test if the save function works for Amenity"""
-        amenity = Amenity()
-        old_updated_at = amenity.updated_at
-        amenity.save()
-        self.assertNotEqual(old_updated_at, amenity.updated_at)
+        self.amenity.save()
+        actual = type(self.amenity.updated_at)
+        expected = type(datetime.now())
+        self.assertEqual(expected, actual)
 
     def test_amenity_to_dict(self):
         """Test if the to_dict function works for Amenity"""

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import unittest
+from datetime import datetime
 from models.review import Review
 from models import storage
 import inspect
@@ -146,6 +147,14 @@ class TestReview(unittest.TestCase):
         all_reviews = storage.all(Review)
         review_key = "Review." + self.review.id
         self.assertIn(review_key, all_reviews)
+
+    @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
+    def test_updated_at_save(self):
+        """Test function to save updated_at attribute"""
+        self.review.save()
+        actual = type(self.review.updated_at)
+        expected = type(datetime.now())
+        self.assertEqual(expected, actual)
 
     def test_review_storage(self):
         """Test if Review is correctly stored in the storage"""
