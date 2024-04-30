@@ -7,6 +7,7 @@ import shlex
 from models import storage, classes
 from models.engine.file_storage import FileStorage
 
+
 class HBNBCommand(cmd.Cmd):
     """this class for the command interpreter"""
     prompt = '(hbnb)'
