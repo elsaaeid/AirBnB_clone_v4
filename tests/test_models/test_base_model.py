@@ -150,12 +150,12 @@ class TestBaseModel(unittest.TestCase):
         """Test that id is a valid UUID"""
         model1 = BaseModel()
         model2 = BaseModel()
-        idReg = '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+        id_regex = '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
         for inst in [model1, model2]:
             uuid = inst.id
             with self.subTest(uuid=uuid):
                 self.assertIsInstance(uuid, str)
-                self.assertRegex(uuid, idReg)
+                self.assertRegex(uuid, id_regex)
         self.assertNotEqual(model1.id, model2.id)
 
     def test_to_dict(self):
