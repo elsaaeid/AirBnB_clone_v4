@@ -118,15 +118,19 @@ class TestState(unittest.TestCase):
         self.assertIn("__class__", new_dict)
 
     def test_to_dict_values(self):
-        """Test that values in dict returned from to_dict are correct"""
+        """Test that values in dict returned
+        from to_dict are correct
+        """
         t_format = "%Y-%m-%dT%H:%M:%S.%f"
-        s = State()
-        new_dict = s.to_dict()
+        state = State()
+        new_dict = state.to_dict()
         self.assertEqual(new_dict["__class__"], "State")
         self.assertEqual(type(new_dict["created_at"]), str)
         self.assertEqual(type(new_dict["updated_at"]), str)
-        self.assertEqual(new_dict["created_at"], s.created_at.strftime(t_format))
-        self.assertEqual(new_dict["updated_at"], s.updated_at.strftime(t_format))
+        self.assertEqual(new_dict["created_at"],
+                         state.created_at.strftime(t_format))
+        self.assertEqual(new_dict["updated_at"],
+                         state.updated_at.strftime(t_format))
 
     def test_str(self):
         """Test that the str method has the correct output"""
