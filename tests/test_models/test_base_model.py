@@ -147,18 +147,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(model1.created_at, model2.created_at)
         self.assertNotEqual(model1.updated_at, model2.updated_at)
 
-    # def test_uuid(self):
-        """Test that id is a valid UUID"""
-        # model1 = BaseModel()
-        # model2 = BaseModel()
-        # id_regex = '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-        # for inst in [model1, model2]:
-        #     uuid = inst.id
-        #     with self.subTest(uuid=uuid):
-        #         self.assertIsInstance(uuid, str)
-        #         self.assertRegex(uuid, id_regex)
-        # self.assertNotEqual(model1.id, model2.id)
-
     def test_to_dict(self):
         """Test conversion of object attributes to dictionary"""
         self.model.name = "Holberton"
