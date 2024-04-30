@@ -96,8 +96,8 @@ class TestCity(unittest.TestCase):
         self.assertTrue(hasattr(city, "created_at"))
         self.assertTrue(hasattr(city, "updated_at"))
 
-    def test_to_dict_creates_dict(self):
-        """test to_dict method creates a dictionary with proper attrs"""
+    def test_to_dict(self):
+        """test to_dict method creates a dictionary"""
         am = City()
         new_d = am.to_dict()
         self.assertEqual(type(new_d), dict)
@@ -108,15 +108,15 @@ class TestCity(unittest.TestCase):
         self.assertIn('__class__', new_d)
 
     def test_to_dict_values(self):
-        """test that values in dict returned from to_dict are correct"""
-        t_format = "%Y-%m-%dT%H:%M:%S.%f"
-        am = City()
-        new_d = am.to_dict()
+        """test that values in to_dict are correct"""
+        format_t = "%Y-%m-%dT%H:%M:%S.%f"
+        city = City()
+        new_d = city.to_dict()
         self.assertEqual(new_d["__class__"], "City")
         self.assertIsInstance(new_d["created_at"], str)
         self.assertIsInstance(new_d["updated_at"], str)
-        self.assertEqual(am.created_at.strftime(t_format), new_d["created_at"])
-        self.assertEqual(am.updated_at.strftime(t_format), new_d["updated_at"])
+        self.assertEqual(city.created_at.strftime(format_t), new_d["created_at"])
+        self.assertEqual(city.updated_at.strftime(format_t), new_d["updated_at"])
 
     def test_str(self):
         """test that the str method has the correct output"""
@@ -135,13 +135,6 @@ class TestCity(unittest.TestCase):
         actual = type(self.city.updated_at)
         expected = type(datetime.now())
         self.assertEqual(expected, actual)
-
-    def test_city_to_dict(self):
-        """Test if the to_dict function works for City"""
-        city_dict = self.city.to_dict()
-        self.assertEqual(self.city.__class__.__name__, 'City')
-        self.assertIsInstance(city_dict['created_at'], str)
-        self.assertIsInstance(city_dict['updated_at'], str)
 
     def test_city_storage(self):
         """Test if City is correctly stored in the storage"""

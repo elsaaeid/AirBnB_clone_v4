@@ -123,10 +123,8 @@ class TestPlace(unittest.TestCase):
         place = Place()
         self.assertIsInstance(place, Place)
 
-    def test_to_dict_creates_dict(self):
-        """Test to_dict method creates a dictionary
-        with proper attributes
-        """
+    def test_to_dict(self):
+        """Test to_dict method creates a dictionary"""
         p = Place()
         new_d = p.to_dict()
         self.assertEqual(type(new_d), dict)
@@ -137,19 +135,18 @@ class TestPlace(unittest.TestCase):
         self.assertTrue("__class__" in new_d)
 
     def test_to_dict_values(self):
-        """Test that values in dict returned
-        from to_dict are correct
+        """Test that values in to_dict are correct
         """
-        t_format = "%Y-%m-%dT%H:%M:%S.%f"
+        format_t = "%Y-%m-%dT%H:%M:%S.%f"
         p = Place()
         new_d = p.to_dict()
         self.assertEqual(new_d["__class__"], "Place")
         self.assertEqual(type(new_d["created_at"]), str)
         self.assertEqual(type(new_d["updated_at"]), str)
         self.assertEqual(new_d["created_at"],
-                         p.created_at.strftime(t_format))
+                         p.created_at.strftime(format_t))
         self.assertEqual(new_d["updated_at"],
-                         p.updated_at.strftime(t_format))
+                         p.updated_at.strftime(format_t))
 
     def test_str(self):
         """Test that the str method has the correct output"""
@@ -174,13 +171,6 @@ class TestPlace(unittest.TestCase):
         actual = type(self.place.updated_at)
         expected = type(datetime.now())
         self.assertEqual(expected, actual)
-
-    def test_place_to_dict(self):
-        """Test if the to_dict function works for Place"""
-        place_dict = self.place.to_dict()
-        self.assertEqual(self.place.__class__.__name__, 'Place')
-        self.assertIsInstance(place_dict['created_at'], str)
-        self.assertIsInstance(place_dict['updated_at'], str)
 
     def test_place_storage(self):
         """Test if Place is correctly stored in the storage"""

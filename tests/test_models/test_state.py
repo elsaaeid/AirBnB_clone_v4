@@ -106,8 +106,8 @@ class TestState(unittest.TestCase):
         else:
             self.assertEqual(state.name, "")
 
-    def test_to_dict_creates_dict(self):
-        """Test if to_dict method creates a dictionary with proper attributes"""
+    def test_to_dict(self):
+        """Test if to_dict method creates a dictionary"""
         s = State()
         new_dict = s.to_dict()
         self.assertEqual(type(new_dict), dict)
@@ -118,19 +118,18 @@ class TestState(unittest.TestCase):
         self.assertIn("__class__", new_dict)
 
     def test_to_dict_values(self):
-        """Test that values in dict returned
-        from to_dict are correct
+        """Test that values in to_dict are correct
         """
-        t_format = "%Y-%m-%dT%H:%M:%S.%f"
+        format_t = "%Y-%m-%dT%H:%M:%S.%f"
         state = State()
         new_dict = state.to_dict()
         self.assertEqual(new_dict["__class__"], "State")
         self.assertEqual(type(new_dict["created_at"]), str)
         self.assertEqual(type(new_dict["updated_at"]), str)
         self.assertEqual(new_dict["created_at"],
-                         state.created_at.strftime(t_format))
+                         state.created_at.strftime(format_t))
         self.assertEqual(new_dict["updated_at"],
-                         state.updated_at.strftime(t_format))
+                         state.updated_at.strftime(format_t))
 
     def test_str(self):
         """Test that the str method has the correct output"""
@@ -154,14 +153,6 @@ class TestState(unittest.TestCase):
         actual = type(self.state.updated_at)
         expected = type(datetime.now())
         self.assertEqual(expected, actual)
-
-    def test_state_to_dict(self):
-        """Test if the to_dict function works for State"""
-        state = State()
-        state_dict = state.to_dict()
-        self.assertEqual(state.__class__.__name__, 'State')
-        self.assertIsInstance(state_dict['created_at'], str)
-        self.assertIsInstance(state_dict['updated_at'], str)
 
     def test_state_storage(self):
         """Test if State is correctly stored in the storage"""

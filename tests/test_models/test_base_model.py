@@ -172,16 +172,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(new_dict['my_number'], 89)
 
     def test_to_dict_values(self):
-        """Test that values in dict returned from to_dict are correct"""
-        t_format = "%Y-%m-%dT%H:%M:%S.%f"
+        """Test that values in to_dict are correct"""
+        format_t = "%Y-%m-%dT%H:%M:%S.%f"
         new_dict = self.model.to_dict()
         self.assertEqual(new_dict["__class__"], "BaseModel")
         self.assertEqual(type(new_dict["created_at"]), str)
         self.assertEqual(type(new_dict["updated_at"]), str)
         self.assertEqual(new_dict["created_at"],
-                         self.model.created_at.strftime(t_format))
+                         self.model.created_at.strftime(format_t))
         self.assertEqual(new_dict["updated_at"],
-                         self.model.updated_at.strftime(t_format))
+                         self.model.updated_at.strftime(format_t))
 
 
 if __name__ == '__main__':
