@@ -99,10 +99,10 @@ class TestBaseModel(unittest.TestCase):
     def test_str_representation(self):
         """Test if BaseModel has a string representation"""
         string_representation = str(self.model)
-        expected_representation = f"[BaseModel]
-        ({self.model.id}) {self.model.__dict__}"
-        self.assertEqual(string_representation,
-                         expected_representation)
+        dict_ = self.model.__dict__
+        expected_representation = f"[BaseModel] ({self.model.id}) {dict_}"
+        self.assertEqual(string_representation, expected_representation)
+
 
     @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
     def test_updated_at_save(self):
