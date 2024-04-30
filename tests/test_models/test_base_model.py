@@ -5,9 +5,9 @@ import pep8
 from datetime import datetime
 import os
 import models
-module_doc = models.base_model.__doc__
 from models.base_model import BaseModel
 
+module_doc = BaseModel.__doc__
 
 class TestBaseModelDocs(unittest.TestCase):
     """Tests for the documentation
