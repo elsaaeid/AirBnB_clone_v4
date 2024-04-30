@@ -60,7 +60,7 @@ class BaseModel(Base):
             del new_dict["_sa_instance_state"]
         if secure_pwd and models.storage_type == "db":
             del new_dict['password']
-        return 
+        return
 
     @classmethod
     def reload(cls):
@@ -84,7 +84,7 @@ class BaseModel(Base):
                         instance = cls(**obj_data)
                         setattr(cls, obj_id, instance)
 
-    def save(self):
+    def save_file(self):
         """Serializes instances to a JSON file"""
         file_path = "file.json"
         data = {}
