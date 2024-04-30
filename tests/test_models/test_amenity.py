@@ -119,8 +119,10 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(new_dict["__class__"], "Amenity")
         self.assertIsInstance(new_dict["created_at"], str)
         self.assertIsInstance(new_dict["updated_at"], str)
-        self.assertEqual(amenity.created_at.strftime(format_t), new_dict["created_at"])
-        self.assertEqual(amenity.updated_at.strftime(format_t), new_dict["updated_at"])
+        self.assertEqual(amenity.created_at.strftime(format_t),
+                         new_dict["created_at"])
+        self.assertEqual(amenity.updated_at.strftime(format_t),
+                         new_dict["updated_at"])
 
     def test_str(self):
         """test that the str method has the correct output"""
