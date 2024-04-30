@@ -54,7 +54,7 @@ class BaseModel(Base):
             del new_dict["_sa_instance_state"]
         if secure_pwd and models.storage_type == "db":
             del new_dict['password']
-        return
+        return new_dict
 
     @classmethod
     def reload(cls):
