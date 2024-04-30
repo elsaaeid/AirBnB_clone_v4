@@ -100,24 +100,24 @@ class TestAmenity(unittest.TestCase):
     def test_to_dict(self):
         """test to_dict method creates a dictionary"""
         amenity = Amenity()
-        new_d = amenity.to_dict()
-        self.assertEqual(type(new_d), dict)
-        self.assertNotIn('_sa_instance_state', new_d)
+        new_dict = amenity.to_dict()
+        self.assertEqual(type(new_dict), dict)
+        self.assertNotIn('_sa_instance_state', new_dict)
         for attr in amenity.__dict__:
             if attr != "_sa_instance_state":
-                self.assertIn(attr, new_d)
-        self.assertIn('__class__', new_d)
+                self.assertIn(attr, new_dict)
+        self.assertIn('__class__', new_dict)
 
     def test_to_dict_values(self):
         """test that values in to_dict are correct"""
         format_t = "%Y-%m-%dT%H:%M:%S.%f"
         amenity = Amenity()
-        new_d = amenity.to_dict()
-        self.assertEqual(new_d["__class__"], "Amenity")
-        self.assertIsInstance(new_d["created_at"], str)
-        self.assertIsInstance(new_d["updated_at"], str)
-        self.assertEqual(amenity.created_at.strftime(format_t), new_d["created_at"])
-        self.assertEqual(amenity.updated_at.strftime(format_t), new_d["updated_at"])
+        new_dict = amenity.to_dict()
+        self.assertEqual(new_dict["__class__"], "Amenity")
+        self.assertIsInstance(new_dict["created_at"], str)
+        self.assertIsInstance(new_dict["updated_at"], str)
+        self.assertEqual(amenity.created_at.strftime(format_t), new_dict["created_at"])
+        self.assertEqual(amenity.updated_at.strftime(format_t), new_dict["updated_at"])
 
     def test_str(self):
         """test that the str method has the correct output"""
