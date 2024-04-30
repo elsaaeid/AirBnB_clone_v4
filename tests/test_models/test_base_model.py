@@ -103,7 +103,6 @@ class TestBaseModel(unittest.TestCase):
         expected_representation = f"[BaseModel] ({self.model.id}) {dict_}"
         self.assertEqual(string_representation, expected_representation)
 
-
     @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
     def test_updated_at_save(self):
         """Test function to save updated_at attribute"""
@@ -151,12 +150,12 @@ class TestBaseModel(unittest.TestCase):
         """Test that id is a valid UUID"""
         model1 = BaseModel()
         model2 = BaseModel()
+        idReg = '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
         for inst in [model1, model2]:
             uuid = inst.id
             with self.subTest(uuid=uuid):
                 self.assertIsInstance(uuid, str)
-                self.assertRegex(uuid,
-                                 '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+                self.assertRegex(uuid, idReg)
         self.assertNotEqual(model1.id, model2.id)
 
     def test_to_dict(self):
