@@ -130,9 +130,10 @@ class TestAmenity(unittest.TestCase):
 
     def test_amenity_save(self):
         """Test if the save function works for Amenity"""
-        old_updated_at = self.amenity.updated_at
-        self.amenity.save()
-        self.assertNotEqual(old_updated_at, self.amenity.updated_at)
+        amenity = Amenity()
+        old_updated_at = amenity.updated_at
+        amenity.save()
+        self.assertNotEqual(old_updated_at, amenity.updated_at)
 
     def test_amenity_to_dict(self):
         """Test if the to_dict function works for Amenity"""
