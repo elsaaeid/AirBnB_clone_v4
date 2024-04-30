@@ -33,19 +33,29 @@ class TestFileStorageDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.fs_functions = inspect.getmembers(FileStorage, inspect.isfunction)
 
-    def test_pep8_conformance_file_storage(self):
-        """Test that models/engine/file_storage.py conforms to PEP8."""
-        pep8s = pep8.StyleGuide(quiet=True)
-        result = pep8s.check_files(['models/engine/file_storage.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings.")
+    def test_pep8_equality(self):
+        """Test that file_storage.py
+        test_file_storage.py nad conform to PEP8"""
+        files_to_check = ['models/engine/file_storage.py',
+                          'tests/test_models/test_engine/test_file_storage.py']
+        style_guide = pep8.StyleGuide()
+        total_errors = 0
+        error_messages = []
 
-    def test_pep8_conformance_test_file_storage(self):
-        """Test tests/test_models/test_file_storage.py conforms to PEP8."""
-        pep8s = pep8.StyleGuide(quiet=True)
-        result = pep8s.check_files(['tests/test_models/test_engine/test_file_storage.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings.")
+        for file_path in files_to_check:
+            with self.subTest(path=file_path):
+                result = style_guide.check_files([file_path])
+                errors = result.total_errors
+
+                if errors > 0:
+                    print(f"PEP8 errors in {file_path}:")
+                    for error in result.messages:
+                        error_messages.append(f"- {error}")
+                total_errors += errors
+        if total_errors > 0:
+            error_message = f"Total PEP8 errors: {total_errors}\n"
+            error_message += "\n".join(error_messages)
+            self.fail(error_message)
 
     def test_file_storage_module_docstring(self):
         """Test for the file_storage.py module docstring"""
