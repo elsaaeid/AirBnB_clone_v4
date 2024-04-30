@@ -2,16 +2,16 @@
 import unittest
 import inspect
 import pep8
-import time
 from datetime import datetime
 import os
 import models
-BaseModel = models.base_model.BaseModel
 module_doc = models.base_model.__doc__
 from models.base_model import BaseModel
 
+
 class TestBaseModelDocs(unittest.TestCase):
-    """Tests for the documentation and style of BaseModel class"""
+    """Tests for the documentation
+    and style of BaseModel class"""
 
     @classmethod
     def setUpClass(cls):
@@ -99,8 +99,10 @@ class TestBaseModel(unittest.TestCase):
     def test_str_representation(self):
         """Test if BaseModel has a string representation"""
         string_representation = str(self.model)
-        expected_representation = f"[BaseModel] ({self.model.id}) {self.model.__dict__}"
-        self.assertEqual(string_representation, expected_representation)
+        expected_representation = f"[BaseModel]
+        ({self.model.id}) {self.model.__dict__}"
+        self.assertEqual(string_representation,
+                         expected_representation)
 
     @unittest.skipIf(models.storage_type == 'db', 'skip if environ is db')
     def test_updated_at_save(self):
@@ -134,7 +136,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(new_model, BaseModel)
 
     def test_datetime_attributes(self):
-        """Test that two BaseModel instances have correct datetime attributes"""
+        """Test that two BaseModel instances
+        have correct datetime attributes"""
         model1 = BaseModel()
         model2 = BaseModel()
         self.assertLessEqual(model1.created_at, datetime.utcnow())
@@ -152,7 +155,8 @@ class TestBaseModel(unittest.TestCase):
             uuid = inst.id
             with self.subTest(uuid=uuid):
                 self.assertIsInstance(uuid, str)
-                self.assertRegex(uuid, '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+                self.assertRegex(uuid,
+                                 '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
         self.assertNotEqual(model1.id, model2.id)
 
     def test_to_dict(self):
@@ -160,7 +164,8 @@ class TestBaseModel(unittest.TestCase):
         self.model.name = "Holberton"
         self.model.my_number = 89
         new_dict = self.model.to_dict()
-        expected_attributes = ["id", "created_at", "updated_at", "name", "my_number", "__class__"]
+        expected_attributes = ["id", "created_at", "updated_at",
+                               "name", "my_number", "__class__"]
         self.assertCountEqual(new_dict.keys(), expected_attributes)
         self.assertEqual(new_dict['__class__'], 'BaseModel')
         self.assertEqual(new_dict['name'], "Holberton")
@@ -173,8 +178,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(new_dict["__class__"], "BaseModel")
         self.assertEqual(type(new_dict["created_at"]), str)
         self.assertEqual(type(new_dict["updated_at"]), str)
-        self.assertEqual(new_dict["created_at"], self.model.created_at.strftime(t_format))
-        self.assertEqual(new_dict["updated_at"], self.model.updated_at.strftime(t_format))
+        self.assertEqual(new_dict["created_at"],
+                         self.model.created_at.strftime(t_format))
+        self.assertEqual(new_dict["updated_at"],
+                         self.model.updated_at.strftime(t_format))
 
 
 if __name__ == '__main__':
