@@ -15,15 +15,6 @@ from models.amenity import Amenity
 from models.review import Review
 import json
 
-classes = {
-    "Amenity": Amenity,
-    "City": City,
-    "Place": Place,
-    "Review": Review,
-    "State": State,
-    "User": User
-}
-
 
 class HBNBCommand(cmd.Cmd):
     """this class for the command interpreter"""
