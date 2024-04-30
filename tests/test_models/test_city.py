@@ -115,8 +115,10 @@ class TestCity(unittest.TestCase):
         self.assertEqual(new_d["__class__"], "City")
         self.assertIsInstance(new_d["created_at"], str)
         self.assertIsInstance(new_d["updated_at"], str)
-        self.assertEqual(city.created_at.strftime(format_t), new_d["created_at"])
-        self.assertEqual(city.updated_at.strftime(format_t), new_d["updated_at"])
+        self.assertEqual(city.created_at.strftime(format_t),
+                         new_d["created_at"])
+        self.assertEqual(city.updated_at.strftime(format_t),
+                         new_d["updated_at"])
 
     def test_str(self):
         """test that the str method has the correct output"""
