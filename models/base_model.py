@@ -66,17 +66,21 @@ class BaseModel(Base):
     def reload(cls):
         """Deserializes the JSON file to instances"""
         file_path = "file.json"
-        format_t = "%Y-%m-%dT%H:%M:%S.%f"
+        format_created = datetime.strptime(obj_data['created_at'],
+                                           "%Y-%m-%dT%H:%M:%S.%f")
+        format_updated = datetime.strptime(obj_data['updated_at'],
+                                           "%Y-%m-%dT%H:%M:%S.%f")
         if os.path.exists(file_path):
             with open(file_path, 'r') as file:
                 data = json.load(file)
                 for obj_id, obj_data in data.items():
                     if obj_data['__class__'] == cls.__name__:
                         del obj_data['__class__']
-                        obj_data['created_at'] = datetime.strptime(obj_data['created_at'], format_t)
-                        obj_data['updated_at'] = datetime.strptime(obj_data['updated_at'], format_t)
+                        obj_data['created_at'] = format_created
+                        obj_data['updated_at'] = format_updated
                         if 'password' in obj_data:
-                            obj_data['password'] = md5(obj_data['password'].encode()).hexdigest()
+                            obj_data['password'] = md5(
+                                ['password'].encode()).hexdigest()
                         instance = cls(**obj_data)
                         setattr(cls, obj_id, instance)
 
