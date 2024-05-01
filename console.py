@@ -8,7 +8,6 @@ import models
 class HBNBCommand(cmd.Cmd):
     """this class for the command interpreter"""
     prompt = '(hbnb)'
-    file = None
 
     def do_EOF(self, arg):
         """EOF is command used to exit the program"""
