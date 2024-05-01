@@ -70,35 +70,35 @@ class TestConsole(unittest.TestCase):
 
     def test_base_model_all(self):
         """Test the "all" command for BaseModel"""
-        expected_output = "<expected output from the all command>"
+        expected_output = "[BaseModel]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all BaseModel")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_base_model_count(self):
         """Test the "count" command for BaseModel"""
-        expected_output = "<expected output from the count command>"
+        expected_output = "[BaseModel]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.count()")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_base_model_show(self):
         """Test the "show" command for BaseModel"""
-        expected_output = "<expected output from the show command>"
+        expected_output = "[BaseModel]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show BaseModel 12345-6789")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_base_model_destroy(self):
         """Test the "destroy" command for BaseModel"""
-        expected_output = "<expected output from the destroy command>"
+        expected_output = "[BaseModel]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy BaseModel 12345-6789")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_base_model_update(self):
         """Test the "update" command for BaseModel"""
-        expected_output = "<expected output from the update command>"
+        expected_output = "[BaseModel]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update BaseModel")
             self.assertEqual(f.getvalue().strip(), expected_output)
@@ -111,28 +111,28 @@ class TestConsole(unittest.TestCase):
 
     def test_amenity_count(self):
         """Test the "count" command for Amenity"""
-        expected_output = "<expected output from the count command>"
+        expected_output = "[Amenity]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Amenity.count()")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_show(self):
         """Test the "show" command for Amenity"""
-        expected_output = "<expected output from the show command>"
+        expected_output = "[Amenity]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show Amenity 12345-6789")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_destroy(self):
         """Test the "destroy" command for Amenity"""
-        expected_output = "<expected output from the destroy command>"
+        expected_output = "[Amenity]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy Amenity 12345-6789")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_update(self):
         """Test the "update" command for Amenity"""
-        expected_output = "<expected output from the update command>"
+        expected_output = "[Amenity]"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update Amenity")
             self.assertEqual(f.getvalue().strip(), expected_output)
