@@ -105,10 +105,10 @@ class TestConsole(unittest.TestCase):
 
     def test_amenity_all(self):
         """Test the "all" command for Amenity"""
+        expected_output = "<expected output from the all command>"
         with patch('sys.stdout', new=StringIO()) as f:
-            expected_output = "<expected output from the all command>"
-            self.assert_stdout("all Amenity", expected_output)
-            self.assertEqual(expected_output.strip(), f.getvalue().strip())
+            HBNBCommand().onecmd("all Amenity")
+            self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_count(self):
         """Test the "count" command for Amenity"""
