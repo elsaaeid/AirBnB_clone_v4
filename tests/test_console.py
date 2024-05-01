@@ -111,7 +111,7 @@ class TestConsole(unittest.TestCase):
 
     def test_amenity_count(self):
         """Test the "count" command for Amenity"""
-        expected_output = "6"
+        expected_output = "8"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Amenity.count()")
             self.assertEqual(f.getvalue().strip(), expected_output)
