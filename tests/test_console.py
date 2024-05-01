@@ -104,11 +104,10 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_all(self):
-        """Test the "all" command for Amenity"""
-        expected_output = "<expected output from the all command>"
+        """Test the all command"""
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("all Amenity")
-            self.assertEqual(f.getvalue().strip(), expected_output)
+            HBNBCommand().onecmd("all")
+            self.assertIn("[]", f.getvalue())
 
     def test_amenity_count(self):
         """Test the "count" command for Amenity"""
