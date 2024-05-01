@@ -71,28 +71,33 @@ class TestConsole(unittest.TestCase):
         """Test the "all" command for BaseModel"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all BaseModel")
-            self.assertEqual(f.getvalue().strip(), "<expected output from the all command>")
+            self.assertEqual(f.getvalue().strip(),
+                             "<expected output from the all command>")
 
     def test_count_command(self):
         """Test the "count" command for BaseModel"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("BaseModel.count()")
-            self.assertEqual(f.getvalue().strip(), "<expected output from the count command>")
+            self.assertEqual(f.getvalue().strip(),
+                             "<expected output from the count command>")
 
     def test_show_command(self):
         """Test the "show" command for BaseModel"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show BaseModel 12345-6789")
-            self.assertEqual(f.getvalue().strip(), "<expected output from the show command>")
+            self.assertEqual(f.getvalue().strip(),
+                             "<expected output from the show command>")
 
     def test_destroy_command(self):
         """Test the "destroy" command for BaseModel"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy BaseModel 12345-6789")
-            self.assertEqual(f.getvalue().strip(), "<expected output from the destroy command>")
+            self.assertEqual(f.getvalue().strip(),
+                             "<expected output from the destroy command>")
 
     def test_update_command(self):
         """Test the "update" command for BaseModel"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update BaseModel 12345-6789 attribute_name string_value")
-            self.assertEqual(f.getvalue().strip(), "<expected output from the update command>")
+            self.assertEqual(f.getvalue().strip(),
+                             "<expected output from the update command>")
