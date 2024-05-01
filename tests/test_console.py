@@ -59,31 +59,40 @@ class TestConsoleDocs(unittest.TestCase):
 
 
 class TestConsole(unittest.TestCase):
-    @patch('sys.stdout', new_callable=StringIO)
-    def assert_stdout(self, command, expected_output, mock_stdout):
-        HBNBCommand().onecmd(command)
-        self.assertEqual(mock_stdout.getvalue().strip(), expected_output)
+    def assert_stdout(self, command, expected_output):
+        """Helper method to assert the captured
+        stdout matches the expected output
+        """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(command)
+            self.assertEqual(f.getvalue().strip(), expected_output)
 
-    def test_help_show(self):
-        with patch('sys.stdout', new=StringIO()) as mock_stdout:
-            HBNBCommand().onecmd("help show")
-            self.assertIn("Prints the string representation of an instance",
-                          mock_stdout.getvalue())
+    def test_all_command(self):
+        """Test the "all" command for BaseModel"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all BaseModel")
+            self.assertEqual(f.getvalue().strip(), "<expected output from the all command>")
 
-    def test_create(self):
-        self.assert_stdout("create BaseModel",
-                           "38f22813-2753-4d42-b37c-57a17f1e4f88")
+    def test_count_command(self):
+        """Test the "count" command for BaseModel"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.count()")
+            self.assertEqual(f.getvalue().strip(), "<expected output from the count command>")
 
-    def test_show(self):
-        self.assert_stdout("show BaseModel 38f22813-2753-4d42-b37c-57a17f1e4f88",
-                           "<instance details>")
-    
-    def test_destroy(self):
-        self.assert_stdout("destroy BaseModel 38f22813-2753-4d42-b37c-57a17f1e4f88", "")
+    def test_show_command(self):
+        """Test the "show" command for BaseModel"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show BaseModel 12345-6789")
+            self.assertEqual(f.getvalue().strip(), "<expected output from the show command>")
 
-    def test_all(self):
-        self.assert_stdout("all BaseModel",
-                           "<all instances>")
-    
-    def test_update(self):
-        self.assert_stdout("update BaseModel 38f22813-2753-4d42-b37c-57a17f1e4f88 {'name': 'New Name'}", "")
+    def test_destroy_command(self):
+        """Test the "destroy" command for BaseModel"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("destroy BaseModel 12345-6789")
+            self.assertEqual(f.getvalue().strip(), "<expected output from the destroy command>")
+
+    def test_update_command(self):
+        """Test the "update" command for BaseModel"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update BaseModel 12345-6789 attribute_name string_value")
+            self.assertEqual(f.getvalue().strip(), "<expected output from the update command>")
