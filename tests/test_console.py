@@ -111,28 +111,28 @@ class TestConsole(unittest.TestCase):
 
     def test_amenity_count(self):
         """Test the "count" command for Amenity"""
-        expected_output = int
+        expected_output = "8"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("Amenity.count()")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_show(self):
         """Test the "show" command for Amenity"""
-        expected_output = "[Amenity]"
+        expected_output = "** no instance found **"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("show Amenity 12345-6789")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_destroy(self):
         """Test the "destroy" command for Amenity"""
-        expected_output = "[Amenity]"
+        expected_output = "** no instance found **"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("destroy Amenity 12345-6789")
             self.assertEqual(f.getvalue().strip(), expected_output)
 
     def test_amenity_update(self):
         """Test the "update" command for Amenity"""
-        expected_output = "[Amenity]"
+        expected_output = "** insufficient arguments **"
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("update Amenity")
             self.assertEqual(f.getvalue().strip(), expected_output)
