@@ -67,12 +67,39 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd(command)
             self.assertEqual(f.getvalue().strip(), expected_output)
 
-    def test_all_command(self):
+    def test_base_model_all(self):
         """Test the "all" command for BaseModel"""
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("all BaseModel")
-            self.assertEqual(f.getvalue().strip(),
-                             "<expected output from the all command>")
+        self.assert_stdout("all BaseModel",
+                           "<expected output from the all command>")
+
+    def test_review_all(self):
+        """Test the "all" command for Review"""
+        self.assert_stdout("all Review", 
+                           "<expected output from the all command>")
+
+    def test_user_all(self):
+        """Test the "all" command for User"""
+        self.assert_stdout("all User", "<expected output from the all command>")
+
+    def test_state_all(self):
+        """Test the "all" command for State"""
+        self.assert_stdout("all State",
+                           "<expected output from the all command>")
+
+    def test_city_all(self):
+        """Test the "all" command for City"""
+        self.assert_stdout("all City",
+                           "<expected output from the all command>")
+
+    def test_amenity_all(self):
+        """Test the "all" command for Amenity"""
+        self.assert_stdout("all Amenity",
+                           "<expected output from the all command>")
+
+    def test_place_all(self):
+        """Test the "all" command for Place"""
+        self.assert_stdout("all Place",
+                           "<expected output from the all command>")
 
     def test_count_command(self):
         """Test the "count" command for BaseModel"""
