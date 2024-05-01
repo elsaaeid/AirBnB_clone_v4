@@ -75,15 +75,15 @@ class TestConsole(unittest.TestCase):
                            "38f22813-2753-4d42-b37c-57a17f1e4f88")
 
     def test_show(self):
-        self.assert_stdout("show BaseModel",
+        self.assert_stdout("show BaseModel 38f22813-2753-4d42-b37c-57a17f1e4f88",
                            "<instance details>")
     
     def test_destroy(self):
-        self.assert_stdout("destroy BaseModel", "")
+        self.assert_stdout("destroy BaseModel 38f22813-2753-4d42-b37c-57a17f1e4f88", "")
 
     def test_all(self):
         self.assert_stdout("all BaseModel",
                            "<all instances>")
     
     def test_update(self):
-        self.assert_stdout("update BaseModel {'name': 'New Name'}", "")
+        self.assert_stdout("update BaseModel 38f22813-2753-4d42-b37c-57a17f1e4f88 {'name': 'New Name'}", "")
