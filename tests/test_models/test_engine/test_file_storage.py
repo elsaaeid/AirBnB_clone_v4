@@ -69,6 +69,10 @@ class TestFileStorageDocs(unittest.TestCase):
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
+    def setUp(self):
+        """Test initialization"""
+        self.storage = FileStorage()
+        self.storage.__objects = {}
 
     @unittest.skipIf(models.storage_type == 'db', "not testing file storage")
     def test_all_returns_dict(self):
