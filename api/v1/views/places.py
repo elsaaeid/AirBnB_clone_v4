@@ -4,10 +4,12 @@ from models import storage, Place, State, City, Amenity, User
 from api.v1.views import app_views
 
 
-app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+app_views = Blueprint('app_views', __name__,
+                      url_prefix='/api/v1')
 
 
-@app_views.route('/cities/<city_id>/places', methods=['GET'], strict_slashes=False)
+@app_views.route('/cities/<city_id>/places',
+                 methods=['GET'], strict_slashes=False)
 def get_places_by_city(city_id):
     """
     Retrieves the list of all Place objects of a City
@@ -19,7 +21,8 @@ def get_places_by_city(city_id):
     return jsonify(places)
 
 
-@app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/places/<place_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_place(place_id):
     """
     Retrieves a Place object
@@ -31,7 +34,8 @@ def get_place(place_id):
         return jsonify({"error": "Not found"}), 404
 
 
-@app_views.route('/places/<place_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/places/<place_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_place(place_id):
     """
     Deletes a Place object
@@ -45,7 +49,8 @@ def delete_place(place_id):
         return jsonify({"error": "Not found"}), 404
 
 
-@app_views.route('/cities/<city_id>/places', methods=['POST'], strict_slashes=False)
+@app_views.route('/cities/<city_id>/places',
+                 methods=['POST'], strict_slashes=False)
 def create_place(city_id):
     """
     Creates a Place object
@@ -69,7 +74,8 @@ def create_place(city_id):
     return jsonify(new_place.to_dict()), 201
 
 
-@app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/places/<place_id>',
+                 methods=['PUT'], strict_slashes=False)
 def update_place(place_id):
     """
     Updates a Place object
@@ -87,7 +93,8 @@ def update_place(place_id):
     return jsonify(place.to_dict()), 200
 
 
-@app_views.route('/places_search', methods=['POST'], strict_slashes=False)
+@app_views.route('/places_search',
+                 methods=['POST'], strict_slashes=False)
 def places_search():
     if not request.is_json:
         return jsonify({"error": "Not a JSON"}), 400
@@ -107,20 +114,23 @@ def places_search():
             state = storage.get(State, state_id)
             if state:
                 for city in state.cities:
-                    place_ids.update({place.id for place in city.places})
+                    place_ids.update({place.id
+                                      for place in city.places})
 
     if cities:
         for city_id in cities:
             city = storage.get(City, city_id)
             if city:
-                place_ids.update({place.id for place in city.places})
+                place_ids.update({place.id
+                                  for place in city.places})
 
     if amenities:
         places = storage.all(Place).values()
         for amenity_id in amenities:
             amenity = storage.get(Amenity, amenity_id)
             if amenity:
-                places = [place for place in places if amenity in place.amenities]
+                places = [place for place in places
+                          if amenity in place.amenities]
 
     places = [storage.get(Place, place_id) for place_id in place_ids]
     return jsonify([place.to_dict() for place in places])

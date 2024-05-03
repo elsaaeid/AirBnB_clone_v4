@@ -70,7 +70,8 @@ class TestDBStorageDocs(unittest.TestCase):
 class TestDBStorage(unittest.TestCase):
     """Test the DBStorage class"""
 
-    @unittest.skipIf(models.storage_type != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_type != 'db',
+                     "not testing db storage")
     def test_all_returns_dict(self):
         """Test that all returns a dictionary"""
         new_instance = BaseModel()
@@ -80,25 +81,32 @@ class TestDBStorage(unittest.TestCase):
         self.assertIsInstance(all_instances, dict)
         self.assertIn(new_instance, all_instances.values())
 
-    @unittest.skipIf(models.storage_type != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_type != 'db',
+                     "not testing db storage")
     def test_all_no_class(self):
-        """Test that all returns all rows when no class is passed"""
+        """Test that all returns all
+        rows when no class is passed
+        """
         new_instance = BaseModel()
         models.storage_type.new(new_instance)
         models.storage_type.save()
         all_instances = models.storage_type.all()
         self.assertIn(new_instance, all_instances.values())
 
-    @unittest.skipIf(models.storage_type != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_type != 'db',
+                     "not testing db storage")
     def test_new(self):
-        """Test that new adds an object to the database"""
+        """Test that new adds
+        an object to the database
+        """
         new_instance = BaseModel()
         models.storage_type.new(new_instance)
         models.storage_type.save()
         all_instances = models.storage_type.all()
         self.assertIn(new_instance, all_instances.values())
 
-    @unittest.skipIf(models.storage_type != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_type != 'db',
+                     "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to the db"""
         new_instance = BaseModel()
@@ -107,20 +115,28 @@ class TestDBStorage(unittest.TestCase):
         file_path = models.storage_type._DBStorage__engine.file_path
         with open(file_path, 'r') as file:
             data = file.read()
-            self.assertIn(new_instance.__class__.__name__ + '.' + new_instance.id, data)
+            self.assertIn(
+                new_instance.__class__.__name__ + '.' + new_instance.id,
+                data
+                )
 
-    @unittest.skipIf(models.storage_type != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_type != 'db',
+                     "not testing db storage")
     def test_get(self):
         """Test that get retrieves an item in db properly"""
         new_instance = BaseModel()
         models.storage_type.new(new_instance)
         models.storage_type.save()
-        retrieved_instance = models.storage_type.get(BaseModel, new_instance.id)
+        retrieved_instance = models.storage_type.get(BaseModel,
+                                                     new_instance.id)
         self.assertEqual(retrieved_instance, new_instance)
 
-    @unittest.skipIf(models.storage_type != 'db', "not testing db storage")
+    @unittest.skipIf(models.storage_type != 'db',
+                     "not testing db storage")
     def test_count(self):
-        """Test that count returns the right number of elements in the db"""
+        """Test that count returns the right
+        number of elements in the db
+        """
         initial_count = len(models.storage_type.all())
         new_instance = BaseModel()
         models.storage_type.new(new_instance)

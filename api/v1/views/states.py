@@ -3,10 +3,12 @@ from flask import Blueprint, jsonify, request
 from models import storage, State
 from api.v1.views import app_views
 
-app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+app_views = Blueprint('app_views', __name__,
+                      url_prefix='/api/v1')
 
 
-@app_views.route('/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states',
+                 methods=['GET'], strict_slashes=False)
 def get_states():
     """
     Retrieves the list of all State objects
@@ -15,7 +17,8 @@ def get_states():
     return jsonify([state.to_dict() for state in states])
 
 
-@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """
     Retrieves a State object
@@ -27,7 +30,8 @@ def get_state(state_id):
         return jsonify({"error": "Not found"}), 404
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
     """
     Deletes a State object
@@ -41,7 +45,8 @@ def delete_state(state_id):
         return jsonify({"error": "Not found"}), 404
 
 
-@app_views.route('/states', methods=['POST'], strict_slashes=False)
+@app_views.route('/states',
+                 methods=['POST'], strict_slashes=False)
 def create_state():
     """
     Creates a State object
@@ -56,7 +61,8 @@ def create_state():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/states/<state_id>',
+                 methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """
     Updates a State object
