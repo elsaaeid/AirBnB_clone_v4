@@ -19,19 +19,30 @@ class TestDBStorageDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.dbs_functions = inspect.getmembers(DBStorage, inspect.isfunction)
 
-    def test_pep8_conformance_db_storage(self):
-        """Test that db_storage.py to PEP8."""
-        pep8s = pep8.StyleGuide(quiet=True)
-        result = pep8s.check_files(['models/engine/db_storage.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    def test_pep8_equality(self):
+        """Test that db_storag and
+        test_db_storage.py conform to PEP8
+        """
+        files_to_check = ['models/engine/db_storage.py',
+                            'tests/test_models/test_engine/test_db_storage.py']
+        style_guide = pep8.StyleGuide()
+        total_errors = 0
+        error_messages = []
 
-    def test_pep8_conformance_test_db_storage(self):
-        """Test  test_db_storage.py to PEP8."""
-        pep8s = pep8.StyleGuide(quiet=True)
-        result = pep8s.check_files(['tests/test_models/test_engine/test_db_storage.py'])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+        for file_path in files_to_check:
+            with self.subTest(path=file_path):
+                result = style_guide.check_files([file_path])
+                errors = result.total_errors
+
+                if errors > 0:
+                    print(f"PEP8 errors in {file_path}:")
+                    for error in result.messages:
+                        error_messages.append(f"- {error}")
+                total_errors += errors
+        if total_errors > 0:
+            error_message = f"Total PEP8 errors: {total_errors}\n"
+            error_message += "\n".join(error_messages)
+            self.fail(error_message)
 
     def test_db_storage_module_docstring(self):
         """Test for the db_storage.py module docstring"""
