@@ -19,7 +19,8 @@
 	--bath-icon: url(../images/icon_bath.png);
 	--desc-color: rgb(29, 26, 26);
 	--user-color: rgb(29, 26, 26);
-
+	--header-available: #ff545f;
+	--header-api-status: #cccccc;
 }
 
 body {

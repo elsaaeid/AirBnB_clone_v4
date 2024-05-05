@@ -9,12 +9,17 @@
     <link href="../static/styles/3-footer.css?{{ cache_id }}" rel="stylesheet">
     <link href="../static/styles/6-filters.css?{{ cache_id }}" rel="stylesheet">
     <link href="../static/styles/8-places.css?{{ cache_id }}" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- FAVICON -->
     <link rel="shortcut icon" href="../static/images/icon.png?{{ cache_id }}">
+    <!-- JavaScript -->
+    <script src="../static/scripts/4-hbnb.js?{{ cache_id }}"></script>
 </head>
 <body>
     <header>
         <div class="logo"></div>
+        <div id="api_status"></div>
     </header>
     <div class="container">
         <section class="filters">
@@ -39,63 +44,19 @@
                 <h3>Amenities</h3>
                 <h4>&nbsp;</h4>
                 <ul class="popover">
-		            {% for amenity in amenities | sort(attribute="name") %}
-                  <li>{{ amenity.name }}</li>
-		            {% endfor %}
-		            </ul>
+                    {% for amenity in amenities | sort(attribute="name") %}
+                    <li>
+                        <input data-id="{{ amenity.id }}" data-name="{{ amenity.name }}" type="checkbox"/>
+                        {{ amenity.name }}
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </section>
         <section class="places">
           <div class="places_title">
             <h1>Places</h1>
           </div>
-
-          <div class="articles">
-	          {% for place in places | sort(attribute="name") %}
-            <article>
-              <div class="price_title">
-                <div class="article_title">
-                  <h2>{{ place.name }}</h2>
-                </div>
-                <div class="price_by_night">
-                  <div class="price">
-                    {{ place.price_by_night }}
-                  </div>
-                </div>
-              </div>
-              <div class="information">
-                <div class="max_guest">
-                  <div class="guest_icon">
-                  </div>
-                  <div class="guest_number">
-                    <h2>{{ place.max_guest }} Guests</h2>
-                  </div>
-                </div>
-                <div class="number_rooms">
-                  <div class="rooms_icon">
-                  </div>
-                  <div class="rooms_number">
-                    <h2>{{ place.number_rooms }} Bedrooms</h2>
-                  </div>
-                </div>
-                <div class="number_bathrooms">
-                  <div class="bathrooms_icon">
-                  </div>
-                  <div class="bathrooms_number">
-                    <h2>{{ place.number_bathrooms }} Bathroom</h2>
-                  </div>
-                </div>
-              </div>
-              <div class="user">
-                <b>Owner:</b> Olivia
-              </div>
-              <div class="description">
-		          {{ place.description }}
-              </div>
-            </article>
-	          {% endfor %}
-          </div>
-
         </section>
     </div>
     <footer>
